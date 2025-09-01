@@ -47,7 +47,6 @@ const mainAiResponseContainer = document.getElementById('main-ai-response-contai
 const mainAiResponseDiv = document.getElementById('main-ai-response');
 const mainAiLoadingIndicator = document.getElementById('main-ai-loading-indicator');
 
-// This entire block has been updated with the correct API information.
 mainAskGuruForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const question = mainAiQuestionInput.value.trim();
@@ -171,7 +170,7 @@ function displayTips() {
             tipCard.innerHTML = `
                 <h4 class="text-xl font-bold text-cyan-400 mb-2">${tip.name}</h4>
                 <p class="text-gray-300 italic mb-2">shared this wisdom:</p>
-                <p class="text-200">${tip.content}</p>
+                <p class="text-gray-200">${tip.content}</p>
             `;
             communityTipsDisplay.appendChild(tipCard);
         });
@@ -184,9 +183,27 @@ document.addEventListener('DOMContentLoaded', () => {
         waveTips = JSON.parse(storedTips);
     }
     displayTips();
+    // Also display wavers on page load
+    displayWavers();
 });
 
-// --- The Gauntlet Section ---
+// --- Guru AI Top Tier Wavers Section ---
+const waversGrid = document.getElementById('wavers-grid');
+
+function displayWavers() {
+    waversGrid.innerHTML = '';
+    waverData.forEach(waver => {
+        const waverCard = document.createElement('div');
+        waverCard.className = 'card waver-card text-center cursor-pointer';
+        waverCard.setAttribute('onclick', `showWaverDetails(${waver.id})`);
+        waverCard.innerHTML = `
+            <h3 class="text-xl font-bold text-cyan-400 mb-2">${waver.name}</h3>
+            <p class="text-gray-400 mb-1">${waver.team}</p>
+        `;
+        waversGrid.appendChild(waverCard);
+    });
+}
+
 function showWaverDetails(id) {
     const waver = waverData.find(w => w.id === id);
     if (!waver) return;
@@ -208,70 +225,3 @@ function purchaseBrush(productName) {
 }
 
 window.purchaseBrush = purchaseBrush;
-
-// --- NEW FEATURES: Routine Timer and Progress Tracker ---
-
-// Routine Timer Logic
-let timer;
-let seconds = 0;
-const timerDisplay = document.getElementById('timer-display');
-const startTimerBtn = document.getElementById('start-timer-btn');
-const stopTimerBtn = document.getElementById('stop-timer-btn');
-const resetTimerBtn = document.getElementById('reset-timer-btn');
-
-function updateTimerDisplay() {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-}
-
-startTimerBtn.addEventListener('click', () => {
-    if (!timer) {
-        timer = setInterval(() => {
-            seconds++;
-            updateTimerDisplay();
-        }, 1000);
-        showToast('Timer started!');
-    }
-});
-
-stopTimerBtn.addEventListener('click', () => {
-    clearInterval(timer);
-    timer = null;
-    showToast('Timer stopped.');
-});
-
-resetTimerBtn.addEventListener('click', () => {
-    clearInterval(timer);
-    timer = null;
-    seconds = 0;
-    updateTimerDisplay();
-    showToast('Timer reset.');
-});
-
-
-// Progress Tracker Logic
-const progressForm = document.getElementById('progress-form');
-const progressImagesContainer = document.getElementById('progress-images-container');
-
-progressForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const imageFile = document.getElementById('progress-image').files[0];
-    const date = new Date().toLocaleDateString();
-
-    if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const imageUrl = event.target.result;
-            const progressCard = document.createElement('div');
-            progressCard.className = 'card text-center';
-            progressCard.innerHTML = `
-                <img src="${imageUrl}" alt="Wave Progress" class="w-full h-auto rounded-lg mb-2">
-                <p class="text-gray-400 text-sm">Date: ${date}</p>
-            `;
-            progressImagesContainer.appendChild(progressCard);
-            showToast('Progress photo added!');
-        };
-        reader.readAsDataURL(imageFile);
-    }
-});
