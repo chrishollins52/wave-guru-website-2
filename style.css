@@ -271,3 +271,55 @@ body {
     position: relative;
     z-index: 10;
 }
+
+/* Animated Letter Runners */
+.letter-runner {
+    position: absolute;
+    bottom: 10%; /* Adjust vertical position */
+    left: -10%; /* Start off-screen to the left */
+    width: 60px; /* Size of the character/letter box */
+    height: 60px;
+    background-color: var(--color-accent-1); /* Background of the letter box */
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem; /* Size of the letter */
+    font-weight: bold;
+    color: white; /* Color of the letter */
+    box-shadow: 0 0 15px rgba(0, 173, 181, 0.7); /* Glow effect */
+    animation: runAcrossScreen 20s linear infinite; /* Animation definition */
+}
+
+/* Use CSS content property for letters */
+.letter-runner::before {
+    content: var(--letter);
+}
+
+@keyframes runAcrossScreen {
+    0% {
+        transform: translateX(0);
+        opacity: 0; /* Start invisible */
+    }
+    10% {
+        opacity: 1; /* Become visible */
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(120vw); /* Move fully across and off-screen */
+        opacity: 0; /* End invisible */
+    }
+}
+
+/* For smaller screens, make them a bit smaller and higher up */
+@media (max-width: 768px) {
+    .letter-runner {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+        bottom: 5%;
+    }
+}
