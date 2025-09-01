@@ -38,16 +38,18 @@
         </nav>
     </div>
 
-  <section id="home" class="hero-section relative overflow-hidden">
-    <div class="animated-bg"></div>
-    <h1 class="text-6xl md:text-8xl font-bold leading-tight font-orbitron relative z-10">
-        <span class="text-gradient-main">AI Wave Intelligence</span><br>
-        <span class="text-gradient-secondary">For the Elite Waver</span>
-    </h1>
-    <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mt-4 relative z-10">
-        Your direct uplink to the future of flawless waves. Powered by Guru AI.
-    </p>
-</section>
+    <main class="main-content">
+        <section id="home" class="hero-section relative overflow-hidden">
+            <div class="animated-bg"></div>
+            <h1 class="text-6xl md:text-8xl font-bold leading-tight font-orbitron relative z-10">
+                <span class="text-gradient-main">AI Wave Intelligence</span><br>
+                <span class="text-gradient-secondary">For the Elite Waver</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mt-4 relative z-10">
+                Your direct uplink to the future of flawless waves. Powered by Guru AI.
+            </p>
+        </section>
+
         <section id="guru-tools" class="py-24">
             <h2 class="section-title font-orbitron">Guru AI :: Tools & Analytics</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -72,7 +74,15 @@
                 <div class="glass-card">
                     <h3 class="card-title">Natural Recipe Synthesizer</h3>
                     <p class="card-description">Synthesize custom DIY recipes for natural wave products based on your ingredients and needs.</p>
-                    <button class="cta-button w-full mt-6">GENERATE RECIPES</button>
+                    <form id="recipe-form" class="mt-6 space-y-4">
+                        <input type="text" id="recipe-ingredients" placeholder="Enter ingredients (e.g., Shea Butter, Tea Tree Oil)" class="input-field">
+                        <button type="submit" class="cta-button w-full">GENERATE RECIPES</button>
+                    </form>
+                    <div id="recipe-response-container" class="terminal-response hidden mt-6">
+                        <p class="font-bold text-sky-500">Guru's Recipe::</p>
+                        <div id="recipe-response" class="response-text"></div>
+                    </div>
+                    <div id="recipe-loading-indicator" class="loading-spinner hidden mt-6"></div>
                 </div>
             </div>
         </section>
@@ -145,50 +155,4 @@
                 <div class="glass-card">
                     <h3 class="card-title">Active Data Feed</h3>
                     <div id="community-tips-display" class="space-y-4">
-                        <p id="no-tips-message" class="text-center text-gray-400 italic">:: WAITING FOR DATA INPUT ::</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="armory" class="py-24">
-            <h2 class="section-title font-orbitron">The Armory :: Essential Hardware</h2>
-            <p class="text-center text-gray-600 mt-4 mb-12">Equip yourself with the tools for optimal wave production.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="glass-card">
-                    <h3 class="card-title">Hard Bristle Brush</h3>
-                    <p class="card-description">Designed for maximum pull on coarse hair.</p>
-                    <button onclick="purchaseBrush('HARD BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
-                </div>
-                <div class="glass-card">
-                    <h3 class="card-title">Medium Bristle Brush</h3>
-                    <p class="card-description">The all-purpose tool for most wave patterns.</p>
-                    <button onclick="purchaseBrush('MEDIUM BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
-                </div>
-                <div class="glass-card">
-                    <h3 class="card-title">Soft Bristle Brush</h3>
-                    <p class="card-description">Ideal for laying down frizz and adding shine.</p>
-                    <button onclick="purchaseBrush('SOFT BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p class="text-gray-500">:: ASK GURU 2025 :: ALL PROTOCOLS RESERVED ::</p>
-    </footer>
-
-    <div id="toast-notification" class="toast-notification"></div>
-
-    <div id="waverModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('waverModal')">&times;</span>
-            <h3 id="waverName" class="text-2xl font-bold mb-2 text-teal-500 font-orbitron"></h3>
-            <p id="waverTeam" class="text-gray-700 mb-1"></p>
-            <p id="waverOrigin" class="text-gray-700"></p>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                        <p id="no-tips-message" class="text-center text-gray-40
