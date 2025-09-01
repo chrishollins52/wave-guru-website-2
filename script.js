@@ -57,7 +57,7 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
     mainAiLoadingIndicator.classList.remove('hidden');
     mainAiResponseContainer.classList.add('hidden');
 
-    const apiKey = 'AIzaSyBq2ewxKLEVtDAfpc-J2fTO6Sc4wOx9gyU'; 
+    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
     const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
     try {
@@ -196,3 +196,32 @@ function displayWavers() {
         const waverCard = document.createElement('div');
         waverCard.className = 'card waver-card text-center cursor-pointer';
         waverCard.setAttribute('onclick', `showWaverDetails(${waver.id})`);
+        waverCard.innerHTML = `
+            <h3 class="text-xl font-bold text-cyan-400 mb-2">${waver.name}</h3>
+            <p class="text-gray-400 mb-1">${waver.team}</p>
+        `;
+        waversGrid.appendChild(waverCard);
+    });
+}
+
+function showWaverDetails(id) {
+    const waver = waverData.find(w => w.id === id);
+    if (!waver) return;
+
+    document.getElementById('waverName').textContent = waver.name;
+    document.getElementById('waverTeam').textContent = waver.team;
+    document.getElementById('waverOrigin').textContent = waver.origin;
+    openModal('waverModal');
+}
+
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.showWaverDetails = showWaverDetails;
+
+// --- Product Purchase Section ---
+function purchaseBrush(productName) {
+    const message = `${productName} added to cart! 🛒`;
+    showToast(message);
+}
+
+window.purchaseBrush = purchaseBrush;
