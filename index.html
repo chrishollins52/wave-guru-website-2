@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-950 text-white font-mono">
-
-    <div class="glow-grid-background"></div>
+<body class="bg-gray-100 text-gray-900 font-sans">
 
     <header class="header fixed top-0 left-0 w-full z-50">
-        <a href="#home" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-500">ASK GURU</a>
+        <a href="#home" class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-sky-500">ASK GURU</a>
         <nav class="hidden md:flex space-x-6 text-lg font-medium">
             <a href="#home" class="nav-link">Home</a>
             <a href="#guru-tools" class="nav-link">Tools</a>
@@ -22,7 +20,7 @@
             <a href="#community" class="nav-link">Community</a>
             <a href="#armory" class="nav-link">Armory</a>
         </nav>
-        <button id="mobile-menu-btn" class="md:hidden text-cyan-400 focus:outline-none">
+        <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
@@ -45,7 +43,7 @@
                 <span class="text-gradient-main">AI Wave Intelligence</span><br>
                 <span class="text-gradient-secondary">For the Elite Waver</span>
             </h1>
-            <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mt-4">
+            <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mt-4">
                 Your direct uplink to the future of flawless waves. Powered by Guru AI.
             </p>
         </section>
@@ -53,7 +51,7 @@
         <section id="guru-tools" class="py-24">
             <h2 class="section-title">Guru AI :: Tools & Analytics</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                <div class="glass-card">
+                <div class="light-card">
                     <h3 class="card-title">Ask Guru Terminal</h3>
                     <p class="card-description">Got a wave question? Type it in and receive instant wisdom from our AI.</p>
                     <form id="main-ask-guru-form" class="mt-6 space-y-4">
@@ -61,17 +59,17 @@
                         <button type="submit" class="cta-button w-full">QUERY AI</button>
                     </form>
                     <div id="main-ai-response-container" class="terminal-response hidden mt-6">
-                        <p class="font-bold text-cyan-400">Guru Says::</p>
+                        <p class="font-bold text-sky-500">Guru Says::</p>
                         <div id="main-ai-response" class="response-text"></div>
                     </div>
                     <div id="main-ai-loading-indicator" class="loading-spinner hidden mt-6"></div>
                 </div>
-                <div class="glass-card">
+                <div class="light-card">
                     <h3 class="card-title">Scalp Health Matrix</h3>
                     <p class="card-description">Upload an image and let our AI analyze your scalp, providing a health score and personalized report.</p>
                     <button class="cta-button w-full mt-6">INITIATE SCAN</button>
                 </div>
-                <div class="glass-card">
+                <div class="light-card">
                     <h3 class="card-title">Natural Recipe Synthesizer</h3>
                     <p class="card-description">Synthesize custom DIY recipes for natural wave products based on your ingredients and needs.</p>
                     <button class="cta-button w-full mt-6">GENERATE RECIPES</button>
@@ -81,7 +79,7 @@
 
         <section id="wave-journey" class="py-24">
             <h2 class="section-title">Personalized :: Wave Protocol</h2>
-            <p class="text-center text-gray-400 mt-4 mb-12">Let the Guru AI craft a custom wave routine for your unique hair profile.</p>
+            <p class="text-center text-gray-600 mt-4 mb-12">Let the Guru AI craft a custom wave routine for your unique hair profile.</p>
             <form id="wave-routine-form" class="max-w-xl mx-auto space-y-6">
                 <div>
                     <label for="wave-stage" class="form-label">Current Wave Stage:</label>
@@ -99,98 +97,3 @@
                     <select id="desired-pattern" class="input-field">
                         <option>SELECT YOUR GOAL PATTERN</option>
                         <option>360 WAVES (CLASSIC)</option>
-                        <option>540 WAVES (DIAGONAL)</option>
-                        <option>720 WAVES (SWIRL)</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="hair-type" class="form-label">Hair Texture:</label>
-                    <select id="hair-type" class="input-field">
-                        <option>SELECT YOUR HAIR TYPE</option>
-                        <option>COARSE / THICK</option>
-                        <option>MEDIUM</option>
-                        <option>FINE / SOFT</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="wave-goal" class="form-label">Primary Wave Objective (e.g., deeper waves, more shine):</label>
-                    <input type="text" id="wave-goal" placeholder="e.g., DEEPER WAVES, MORE SHINE..." class="input-field">
-                </div>
-                <button type="submit" class="cta-button w-full">GENERATE PROTOCOL</button>
-            </form>
-            <div id="routine-response-container" class="glass-card hidden mt-6">
-                <div id="routine-response" class="response-text"></div>
-            </div>
-            <div id="routine-loading-indicator" class="loading-spinner hidden mt-6"></div>
-        </section>
-
-        <section id="gauntlet" class="py-24">
-            <h2 class="section-title">Guru AI :: Top Tier Wavers</h2>
-            <p class="text-center text-gray-400 mt-4 mb-12">Prove your dominance. Earn your rank in the global registry.</p>
-            <div id="wavers-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                </div>
-        </section>
-
-        <section id="community" class="py-24">
-            <h2 class="section-title">Community :: Data Stream</h2>
-            <p class="text-center text-gray-400 mt-4 mb-12">Share your wave data and connect with fellow wavers.</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="glass-card">
-                    <h3 class="card-title">Share Wave Data</h3>
-                    <p class="card-description">Contribute your knowledge to the collective wave consciousness.</p>
-                    <form id="wave-tip-form" class="mt-6 space-y-4">
-                        <input type="text" id="community-name" placeholder="[YOUR HANDLE]" class="input-field">
-                        <textarea id="wave-content" rows="4" placeholder="[WAVE PROTOCOL DATA INPUT]" class="input-field"></textarea>
-                        <button type="submit" class="cta-button w-full">TRANSMIT DATA</button>
-                    </form>
-                </div>
-                <div class="glass-card">
-                    <h3 class="card-title">Active Data Feed</h3>
-                    <div id="community-tips-display" class="space-y-4">
-                        <p id="no-tips-message" class="text-center text-gray-600 italic">:: WAITING FOR DATA INPUT ::</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="armory" class="py-24">
-            <h2 class="section-title">The Armory :: Essential Hardware</h2>
-            <p class="text-center text-gray-400 mt-4 mb-12">Equip yourself with the tools for optimal wave production.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="glass-card">
-                    <h3 class="card-title">Hard Bristle Brush</h3>
-                    <p class="card-description">Designed for maximum pull on coarse hair.</p>
-                    <button onclick="purchaseBrush('HARD BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
-                </div>
-                <div class="glass-card">
-                    <h3 class="card-title">Medium Bristle Brush</h3>
-                    <p class="card-description">The all-purpose tool for most wave patterns.</p>
-                    <button onclick="purchaseBrush('MEDIUM BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
-                </div>
-                <div class="glass-card">
-                    <h3 class="card-title">Soft Bristle Brush</h3>
-                    <p class="card-description">Ideal for laying down frizz and adding shine.</p>
-                    <button onclick="purchaseBrush('SOFT BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p class="text-gray-400">:: ASK GURU 2025 :: ALL PROTOCOLS RESERVED ::</p>
-    </footer>
-
-    <div id="toast-notification" class="toast-notification"></div>
-
-    <div id="waverModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('waverModal')">&times;</span>
-            <h3 id="waverName" class="text-2xl font-bold mb-2 text-cyan-400"></h3>
-            <p id="waverTeam" class="text-gray-300 mb-1"></p>
-            <p id="waverOrigin" class="text-gray-300"></p>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
