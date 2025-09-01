@@ -239,6 +239,7 @@ body {
 .footer {
     @apply text-center py-6 border-t border-gray-300 mt-12 text-sm text-gray-500;
 }
+
 /* Animated Background */
 .animated-bg {
     position: absolute;
