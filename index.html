@@ -3,97 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASK GURU - AI Wave Intelligence</title>
+    <title>Ask Guru</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans">
+<body class="bg-gray-900 text-white font-sans">
 
-    <header class="header fixed top-0 left-0 w-full z-50">
-        <a href="#home" class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-sky-500">ASK GURU</a>
+    <div id="toast-notification" class="toast-notification"></div>
+
+    <header class="bg-black text-white py-4 px-6 flex justify-between items-center fixed top-0 left-0 w-full z-50 shadow-lg">
+        <a href="#home" class="text-3xl font-bold text-cyan-400">ASK GURU</a>
         <nav class="hidden md:flex space-x-6 text-lg font-medium">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#guru-tools" class="nav-link">Tools</a>
-            <a href="#wave-journey" class="nav-link">Journey</a>
-            <a href="#community" class="nav-link">Community</a>
-            <a href="#armory" class="nav-link">Armory</a>
+            <a href="#home" class="hover:text-cyan-400 transition-colors">Home</a>
+            <a href="#guru-tools" class="hover:text-cyan-400 transition-colors">Guru Tools</a>
+            <a href="#wave-journey" class="hover:text-cyan-400 transition-colors">Wave Journey</a>
+            <a href="#community" class="hover:text-cyan-400 transition-colors">Community</a>
+            <a href="#products" class="hover:text-cyan-400 transition-colors">Products</a>
+            <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
         </nav>
-        <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+        <button id="mobile-menu-btn" class="md:hidden text-gray-300 focus:outline-none">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
         </button>
     </header>
 
-    <div id="mobile-menu" class="mobile-menu hidden md:hidden">
+    <div id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 w-full bg-gray-900 z-40 py-4 text-center">
         <nav class="flex flex-col space-y-4 text-lg font-medium">
-            <a href="#home" class="block py-2 nav-link">Home</a>
-            <a href="#guru-tools" class="block py-2 nav-link">Tools</a>
-            <a href="#wave-journey" class="block py-2 nav-link">Journey</a>
-            <a href="#community" class="block py-2 nav-link">Community</a>
-            <a href="#armory" class="block py-2 nav-link">Armory</a>
+            <a href="#home" class="block py-2 hover:text-cyan-400 transition-colors">Home</a>
+            <a href="#guru-tools" class="block py-2 hover:text-cyan-400 transition-colors">Guru Tools</a>
+            <a href="#wave-journey" class="block py-2 hover:text-cyan-400 transition-colors">Wave Journey</a>
+            <a href="#community" class="block py-2 hover:text-cyan-400 transition-colors">Community</a>
+            <a href="#products" class="block py-2 hover:text-cyan-400 transition-colors">Products</a>
+            <a href="#contact" class="block py-2 hover:text-cyan-400 transition-colors">Contact</a>
         </nav>
     </div>
 
-    <main class="main-content">
-        <section id="home" class="hero-section">
-            <h1 class="text-6xl md:text-8xl font-bold leading-tight">
-                <span class="text-gradient-main">AI Wave Intelligence</span><br>
-                <span class="text-gradient-secondary">For the Elite Waver</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mt-4">
-                Your direct uplink to the future of flawless waves. Powered by Guru AI.
-            </p>
+    <main class="pt-24 px-4 md:px-8">
+        <section id="home" class="text-center py-20 md:py-32">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-white">Ask Guru</h1>
+            <p class="text-xl md:text-2xl text-gray-400">Your AI-powered guide to flawless waves and ultimate scalp health.</p>
         </section>
 
-        <section id="guru-tools" class="py-24">
-            <h2 class="section-title">Guru AI :: Tools & Analytics</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                <div class="light-card">
-                    <h3 class="card-title">Ask Guru Terminal</h3>
-                    <p class="card-description">Got a wave question? Type it in and receive instant wisdom from our AI.</p>
-                    <form id="main-ask-guru-form" class="mt-6 space-y-4">
-                        <input type="text" id="main-ai-question" placeholder="Ask Guru..." class="input-field">
-                        <button type="submit" class="cta-button w-full">QUERY AI</button>
-                    </form>
-                    <div id="main-ai-response-container" class="terminal-response hidden mt-6">
-                        <p class="font-bold text-sky-500">Guru Says::</p>
-                        <div id="main-ai-response" class="response-text"></div>
+        <section id="guru-tools" class="py-16">
+            <div class="card">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">Guru Tools</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card text-center">
+                        <h3 class="text-xl font-semibold mb-4 text-cyan-400">Ask Guru</h3>
+                        <p class="text-gray-300 mb-6">Got a wave question? Type it in and get instant wisdom.</p>
+                        <form id="main-ask-guru-form" class="space-y-4">
+                            <input type="text" id="main-ai-question" placeholder="Ask a question about waves..." class="input-field">
+                            <button type="submit" class="button w-full">Ask Guru</button>
+                        </form>
+                        <div id="main-ai-response-container" class="card-sm hidden mt-6">
+                            <p class="font-bold text-cyan-400 mb-2">Guru says:</p>
+                            <div id="main-ai-response" class="text-gray-200"></div>
+                        </div>
+                        <div id="main-ai-loading-indicator" class="loading-spinner hidden mt-6"></div>
                     </div>
-                    <div id="main-ai-loading-indicator" class="loading-spinner hidden mt-6"></div>
-                </div>
-                <div class="light-card">
-                    <h3 class="card-title">Scalp Health Matrix</h3>
-                    <p class="card-description">Upload an image and let our AI analyze your scalp, providing a health score and personalized report.</p>
-                    <button class="cta-button w-full mt-6">INITIATE SCAN</button>
-                </div>
-                <div class="light-card">
-                    <h3 class="card-title">Natural Recipe Synthesizer</h3>
-                    <p class="card-description">Synthesize custom DIY recipes for natural wave products based on your ingredients and needs.</p>
-                    <button class="cta-button w-full mt-6">GENERATE RECIPES</button>
+                    <div class="card text-center">
+                        <h3 class="text-xl font-semibold mb-4 text-cyan-400">AI Scalp Health Analyzer</h3>
+                        <p class="text-gray-300 mb-6">Answer a few questions and let our AI analyze your scalp's condition, providing a health score and personalized advice.</p>
+                        <a href="#" class="button w-full">Launch Analyzer →</a>
+                    </div>
+                    <div class="card text-center">
+                        <h3 class="text-xl font-semibold mb-4 text-cyan-400">DIY Natural Product Recipes</h3>
+                        <p class="text-gray-300 mb-6">Ask our AI for recipes to create your own all-natural wave products using simple, common ingredients.</p>
+                        <a href="#" class="button w-full">Get Recipes →</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="wave-journey" class="py-24">
-            <h2 class="section-title">Personalized :: Wave Protocol</h2>
-            <p class="text-center text-gray-600 mt-4 mb-12">Let the Guru AI craft a custom wave routine for your unique hair profile.</p>
-            <form id="wave-routine-form" class="max-w-xl mx-auto space-y-6">
-                <div>
-                    <label for="wave-stage" class="form-label">Current Wave Stage:</label>
-                    <select id="wave-stage" class="input-field">
-                        <option>SELECT YOUR STAGE</option>
-                        <option>BEGINNER</option>
-                        <option>INTERMEDIATE</option>
-                        <option>ADVANCED</option>
-                        <option>WOLFING</option>
-                        <option>MAINTAINING</option>
-                    </select>
+        <section id="wave-journey" class="py-16">
+            <div class="card">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">Your Personalized Wave Journey ✨</h2>
+                <p class="text-center text-gray-300 mb-8">Let the Guru AI craft a custom wave routine just for you!</p>
+                <form id="wave-routine-form" class="max-w-xl mx-auto space-y-6">
+                    <div>
+                        <label for="wave-stage" class="block text-gray-400 mb-2">Current Wave Stage:</label>
+                        <select id="wave-stage" class="input-field">
+                            <option>Select your stage</option>
+                            <option>Beginner (just started)</option>
+                            <option>Intermediate (waves forming)</option>
+                            <option>Advanced (consistent waves)</option>
+                            <option>Wolfing (growing hair for deeper waves)</option>
+                            <option>Maintaining (keeping waves sharp)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="desired-pattern" class="block text-gray-400 mb-2">Desired Wave Pattern:</label>
+                        <select id="desired-pattern" class="input-field">
+                            <option>Select your goal pattern</option>
+                            <option>360 Waves (Classic)</option>
+                            <option>540 Waves (Diagonal)</option>
+                            <option>720 Waves (Swirl)</option>
+                            <option>Beehive Connection</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="hair-type" class="block text-gray-400 mb-2">Hair Texture:</label>
+                        <select id="hair-type" class="input-field">
+                            <option>Select your hair type</option>
+                            <option>Coarse/Thick</option>
+                            <option>Medium</option>
+                            <option>Fine/Soft</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="wave-goal" class="block text-gray-400 mb-2">Your Wave Goals (e.g., deeper waves, fixing forks, more shine):</label>
+                        <input type="text" id="wave-goal" placeholder="e.g. Deeper waves, more shine..." class="input-field">
+                    </div>
+                    <button type="submit" class="button w-full">Get My Custom Routine ✨</button>
+                </form>
+                <div id="routine-response-container" class="card-sm hidden mt-6">
+                    <div id="routine-response"></div>
                 </div>
-                <div>
-                    <label for="desired-pattern" class="form-label">Desired Wave Pattern:</label>
-                    <select id="desired-pattern" class="input-field">
-                        <option>SELECT YOUR GOAL PATTERN</option>
-                        <option>360 WAVES (CLASSIC)</option>
+                <div id="routine-loading-indicator" class="loading-spinner hidden mt-6"></div>
+            </div>
+        </section>
+
+        <section id="gauntlet" class="py-16">
+            <div class="card">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">Guru AI Top Tier Wavers🏆</h2>
+                <p class="text-center text-gray-300 mb-8">Prove your dominance. Earn your rank.</p>
+                <div id="wavers-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    </div>
+            </div>
+        </section>
+
+        <section id="community" class="py-16">
+            <div class="card">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">Community: Share & Learn</h2>
+                <p class="text-center text-gray-300 mb-8">Connect with fellow wavers and share your wisdom.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-4">Share Your Wave Wisdom</h3>
+                        <p class="text-gray-300 mb-4">Help the community grow by sharing your best wave tips or personal success stories!</p>
+                        <form id="wave-tip-form" class="space-y-4">
+                            <input type="text" id="community-name" placeholder="Your Name/Handle" class="input-field">
+                            <textarea id="wave-content" rows="4" placeholder="Your Tip or Story" class="input-field"></textarea>
+                            <button type="submit" class="button w-full">Submit My Wisdom</button>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-4">Community Wave Tips & Stories</h3>
+                        <div id="community-tips-display" class="space-y-4">
+                            <p id="no-tips-message" class="text-center text-gray-400 italic">No tips yet. Be the first to share your wisdom!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="py-16">
+            <div class="card">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">The Armory: Gear Up 🪮</h2>
+                <p class="text-center text-gray-300 mb-8">Invest in the right tools for your waves.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="product-card card">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">The Hard Bristle Brush</h3>
+                        <p class="text-gray-400 mb-4">Perfect for coarse hair, designed for maximum pull.</p>
+                        <button onclick="purchaseBrush('Hard Bristle Brush')" class="button w-full">Add to Cart</button>
+                    </div>
+                    <div class="product-card card">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">The Medium Bristle Brush</h3>
+                        <p class="text-gray-400 mb-4">The all-purpose tool for most wave patterns.</p>
+                        <button onclick="purchaseBrush('Medium Bristle Brush')" class="button w-full">Add to Cart</button>
+                    </div>
+                    <div class="product-card card">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">The Soft Bristle Brush</h3>
+                        <p class="text-gray-400 mb-4">Ideal for laying down frizz and adding shine.</p>
+                        <button onclick="purchaseBrush('Soft Bristle Brush')" class="button w-full">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16">
+            <div class="card">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-400">Contact Us</h2>
+                <p class="text-center text-gray-300 mb-8">We're here to help you on your journey.</p>
+                <form id="contact-form" class="max-w-xl mx-auto space-y-4">
+                    <input type="text" placeholder="Name" class="input-field">
+                    <input type="email" placeholder="Email" class="input-field">
+                    <textarea rows="4" placeholder="Message" class="input-field"></textarea>
+                    <button type="submit" class="button w-full">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-center py-6">
+        <p class="text-gray-400">&copy; 2025 Ask Guru. All rights reserved.</p>
+        <div class="flex justify-center space-x-4 mt-2">
+            <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">Privacy Policy</a>
+            <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">Terms of Service</a>
+        </div>
+    </footer>
+
+    <div id="waverModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('waverModal')">&times;</span>
+            <h3 id="waverName" class="text-2xl font-bold mb-2 text-cyan-400"></h3>
+            <p id="waverTeam" class="text-gray-300 mb-1"></p>
+            <p id="waverOrigin" class="text-gray-300"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
