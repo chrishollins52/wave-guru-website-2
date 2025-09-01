@@ -47,6 +47,7 @@ const mainAiResponseContainer = document.getElementById('main-ai-response-contai
 const mainAiResponseDiv = document.getElementById('main-ai-response');
 const mainAiLoadingIndicator = document.getElementById('main-ai-loading-indicator');
 
+// This entire block has been updated with the correct API information.
 mainAskGuruForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const question = mainAiQuestionInput.value.trim();
@@ -57,7 +58,10 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
     mainAiLoadingIndicator.classList.remove('hidden');
     mainAiResponseContainer.classList.add('hidden');
 
+    // **API Key from your console**
     const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
+    
+    // **API Endpoint from your curl command**
     const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
     try {
@@ -65,9 +69,11 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                // The API key is passed in the header, as shown in the curl command.
                 'X-goog-api-key': apiKey
             },
             body: JSON.stringify({
+                // The request body matches the format required by the Gemini API.
                 contents: [{
                     parts: [{
                         text: question
@@ -77,6 +83,7 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
         });
 
         if (!response.ok) {
+            // Log the full error to the console for easier debugging
             const errorDetails = await response.text();
             console.error('API request failed:', response.status, errorDetails);
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -84,6 +91,7 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
 
         const data = await response.json();
         
+        // This is the correct path to extract the text from the Gemini API response.
         const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
 
         mainAiResponseDiv.textContent = aiResponse;
@@ -183,27 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
         waveTips = JSON.parse(storedTips);
     }
     displayTips();
-    // Also display wavers on page load
-    displayWavers();
 });
 
-// --- Guru AI Top Tier Wavers Section ---
-const waversGrid = document.getElementById('wavers-grid');
-
-function displayWavers() {
-    waversGrid.innerHTML = '';
-    waverData.forEach(waver => {
-        const waverCard = document.createElement('div');
-        waverCard.className = 'card waver-card text-center cursor-pointer';
-        waverCard.setAttribute('onclick', `showWaverDetails(${waver.id})`);
-        waverCard.innerHTML = `
-            <h3 class="text-xl font-bold text-cyan-400 mb-2">${waver.name}</h3>
-            <p class="text-gray-400 mb-1">${waver.team}</p>
-        `;
-        waversGrid.appendChild(waverCard);
-    });
-}
-
+// --- The Gauntlet Section ---
 function showWaverDetails(id) {
     const waver = waverData.find(w => w.id === id);
     if (!waver) return;
