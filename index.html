@@ -48,6 +48,17 @@
             <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mt-4 relative z-10">
                 Your direct uplink to the future of flawless waves. Powered by Guru AI.
             </p>
+
+            <div id="letter-runners-container" class="absolute inset-0 z-20 pointer-events-none">
+                <div class="letter-runner" style="--letter: 'A'; --delay: 0s;"></div>
+                <div class="letter-runner" style="--letter: 'S'; --delay: 0.5s;"></div>
+                <div class="letter-runner" style="--letter: 'K'; --delay: 1s;"></div>
+                <div class="letter-runner" style="--letter: 'G'; --delay: 2s;"></div>
+                <div class="letter-runner" style="--letter: 'U'; --delay: 2.5s;"></div>
+                <div class="letter-runner" style="--letter: 'R'; --delay: 3s;"></div>
+                <div class="letter-runner" style="--letter: 'U'; --delay: 3.5s;"></div>
+            </div>
+            
         </section>
 
         <section id="guru-tools" class="py-24">
@@ -76,83 +87,4 @@
                     <p class="card-description">Synthesize custom DIY recipes for natural wave products based on your ingredients and needs.</p>
                     <form id="recipe-form" class="mt-6 space-y-4">
                         <input type="text" id="recipe-ingredients" placeholder="Enter ingredients (e.g., Shea Butter, Tea Tree Oil)" class="input-field">
-                        <button type="submit" class="cta-button w-full">GENERATE RECIPES</button>
-                    </form>
-                    <div id="recipe-response-container" class="terminal-response hidden mt-6">
-                        <p class="font-bold text-sky-500">Guru's Recipe::</p>
-                        <div id="recipe-response" class="response-text"></div>
-                    </div>
-                    <div id="recipe-loading-indicator" class="loading-spinner hidden mt-6"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="wave-journey" class="py-24">
-            <h2 class="section-title font-orbitron">Personalized :: Wave Protocol</h2>
-            <p class="text-center text-gray-600 mt-4 mb-12">Let the Guru AI craft a custom wave routine for your unique hair profile.</p>
-            <form id="wave-routine-form" class="max-w-xl mx-auto space-y-6">
-                <div>
-                    <label for="wave-stage" class="form-label">Current Wave Stage:</label>
-                    <select id="wave-stage" class="input-field">
-                        <option>SELECT YOUR STAGE</option>
-                        <option>BEGINNER</option>
-                        <option>INTERMEDIATE</option>
-                        <option>ADVANCED</option>
-                        <option>WOLFING</option>
-                        <option>MAINTAINING</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="desired-pattern" class="form-label">Desired Wave Pattern:</label>
-                    <select id="desired-pattern" class="input-field">
-                        <option>SELECT YOUR GOAL PATTERN</option>
-                        <option>360 WAVES (CLASSIC)</option>
-                        <option>540 WAVES (DIAGONAL)</option>
-                        <option>720 WAVES (SWIRL)</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="hair-type" class="form-label">Hair Texture:</label>
-                    <select id="hair-type" class="input-field">
-                        <option>SELECT YOUR HAIR TYPE</option>
-                        <option>COARSE / THICK</option>
-                        <option>MEDIUM</option>
-                        <option>FINE / SOFT</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="wave-goal" class="form-label">Primary Wave Objective (e.g., deeper waves, more shine):</label>
-                    <input type="text" id="wave-goal" placeholder="e.g., DEEPER WAVES, MORE SHINE..." class="input-field">
-                </div>
-                <button type="submit" class="cta-button w-full">GENERATE PROTOCOL</button>
-            </form>
-            <div id="routine-response-container" class="glass-card hidden mt-6">
-                <div id="routine-response" class="response-text"></div>
-            </div>
-            <div id="routine-loading-indicator" class="loading-spinner hidden mt-6"></div>
-        </section>
-
-        <section id="gauntlet" class="py-24">
-            <h2 class="section-title font-orbitron">Guru AI :: Top Tier Wavers</h2>
-            <p class="text-center text-gray-600 mt-4 mb-12">Prove your dominance. Earn your rank in the global registry.</p>
-            <div id="wavers-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                </div>
-        </section>
-
-        <section id="community" class="py-24">
-            <h2 class="section-title font-orbitron">Community :: Data Stream</h2>
-            <p class="text-center text-gray-600 mt-4 mb-12">Share your wave data and connect with fellow wavers.</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="glass-card">
-                    <h3 class="card-title">Share Wave Data</h3>
-                    <p class="card-description">Contribute your knowledge to the collective wave consciousness.</p>
-                    <form id="wave-tip-form" class="mt-6 space-y-4">
-                        <input type="text" id="community-name" placeholder="[YOUR HANDLE]" class="input-field">
-                        <textarea id="wave-content" rows="4" placeholder="[WAVE PROTOCOL DATA INPUT]" class="input-field"></textarea>
-                        <button type="submit" class="cta-button w-full">TRANSMIT DATA</button>
-                    </form>
-                </div>
-                <div class="glass-card">
-                    <h3 class="card-title">Active Data Feed</h3>
-                    <div id="community-tips-display" class="space-y-4">
-                        <p id="no-tips-message" class="text-center text-gray-40
+                        <button type="submit" class="cta-button
