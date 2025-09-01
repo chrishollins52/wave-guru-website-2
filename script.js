@@ -1,5 +1,5 @@
 // --- Global State and Utility Functions ---
-let waveTips = []; 
+let waveTips = []; 
 let waverData = [
     { id: 1, name: 'Waver 1', team: 'Team: Elite Waves', origin: 'Origin: Los Angeles, CA' },
     { id: 2, name: 'Waver 2', team: 'Team: The Wave Gods', origin: 'Origin: New York, NY' },
@@ -59,8 +59,8 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
     mainAiResponseContainer.classList.add('hidden');
 
     // **API Key from your console**
-    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
-    
+    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
+     
     // **API Endpoint from your curl command**
     const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
@@ -90,7 +90,7 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
         }
 
         const data = await response.json();
-        
+         
         // This is the correct path to extract the text from the Gemini API response.
         const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
 
@@ -167,7 +167,7 @@ waveTipForm.addEventListener('submit', function(e) {
 });
 
 function displayTips() {
-    communityTipsDisplay.innerHTML = ''; 
+    communityTipsDisplay.innerHTML = ''; 
     if (waveTips.length === 0) {
         noTipsMessage.style.display = 'block';
     } else {
@@ -215,3 +215,64 @@ function purchaseBrush(productName) {
 }
 
 window.purchaseBrush = purchaseBrush;
+
+// --- Natural Recipe Synthesizer ---
+const recipeForm = document.getElementById('recipe-form');
+const recipeIngredientsInput = document.getElementById('recipe-ingredients');
+const recipeResponseContainer = document.getElementById('recipe-response-container');
+const recipeResponseDiv = document.getElementById('recipe-response');
+const recipeLoadingIndicator = document.getElementById('recipe-loading-indicator');
+
+recipeForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const ingredients = recipeIngredientsInput.value.trim();
+    if (ingredients === '') {
+        return;
+    }
+
+    recipeLoadingIndicator.classList.remove('hidden');
+    recipeResponseContainer.classList.add('hidden');
+    
+    // Use the same API key and URL from the Ask Guru section
+    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; // Replace with your key
+    const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+
+    // Construct a detailed prompt for the AI
+    const prompt = `Based on the following ingredients, create a detailed recipe for a natural hair pomade or product for deep waves: ${ingredients}. Include steps, measurements, and tips for application.`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-goog-api-key': apiKey
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: prompt
+                    }]
+                }]
+            })
+        });
+
+        if (!response.ok) {
+            const errorDetails = await response.text();
+            console.error('API request failed:', response.status, errorDetails);
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
+
+        recipeResponseDiv.textContent = aiResponse;
+
+    } catch (error) {
+        recipeResponseDiv.textContent = `Sorry, an error occurred: ${error.message}. Please check the console for details.`;
+        console.error('Error fetching data from API:', error);
+
+    } finally {
+        recipeLoadingIndicator.classList.add('hidden');
+        recipeResponseContainer.classList.remove('hidden');
+    }
+});
