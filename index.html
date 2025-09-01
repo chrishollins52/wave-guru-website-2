@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Guru</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-100">
+
+    <header class="bg-gray-800 shadow-lg">
+        <nav class="container mx-auto flex items-center justify-between py-4 px-6 md:px-0">
+            <a href="#" class="text-2xl font-bold text-cyan-400">Wave Guru</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#ask-guru" class="text-gray-300 hover:text-cyan-400 transition-colors">Ask Guru AI</a>
+                <a href="#planner" class="text-gray-300 hover:text-cyan-400 transition-colors">Journey Planner</a>
+                <a href="#community" class="text-gray-300 hover:text-cyan-400 transition-colors">Community</a>
+                <a href="#gauntlet" class="text-gray-300 hover:text-cyan-400 transition-colors">The Gauntlet</a>
+                <a href="#products" class="text-gray-300 hover:text-cyan-400 transition-colors">Products</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="text-gray-300 focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-700 py-4">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="#ask-guru" class="mobile-menu-link text-gray-200 block py-2">Ask Guru AI</a></li>
+                <li><a href="#planner" class="mobile-menu-link text-gray-200 block py-2">Journey Planner</a></li>
+                <li><a href="#community" class="mobile-menu-link text-gray-200 block py-2">Community</a></li>
+                <li><a href="#gauntlet" class="mobile-menu-link text-gray-200 block py-2">The Gauntlet</a></li>
+                <li><a href="#products" class="mobile-menu-link text-gray-200 block py-2">Products</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container mx-auto my-12 space-y-16 px-6">
+
+        <section id="ask-guru" class="card">
+            <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">Ask the Guru AI 🧠</h2>
+            <p class="text-center text-gray-300 mb-6">Got a wave question? Type it in and get instant wisdom.</p>
+            <form id="main-ask-guru-form" class="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
+                <input type="text" id="main-ai-question" placeholder="e.g., How do I fix forks? or How to get more shine?" class="flex-grow p-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <button type="submit" class="bg-cyan-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-cyan-700 transition-colors">Ask Guru</button>
+            </form>
+            <div id="main-ai-response-container" class="card mt-6 hidden">
+                <p id="main-ai-response" class="text-lg text-gray-200 text-center"></p>
+            </div>
+            <div id="main-ai-loading-indicator" class="hidden text-center mt-6">
+                <p class="loading-indicator text-cyan-400 text-lg">Thinking...</p>
+            </div>
+        </section>
+
+        <section id="planner" class="card">
+            <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">The Wave Journey Planner 🗺️</h2>
+            <p class="text-center text-gray-300 mb-6">Answer a few questions for a personalized routine.</p>
+            <form id="wave-routine-form" class="space-y-4 max-w-2xl mx-auto">
+                <div>
+                    <label for="wave-stage" class="block text-gray-300 mb-2">My Wave Journey Stage:</label>
+                    <select id="wave-stage" class="w-full p-3 rounded-lg bg-gray-800 text-gray-200">
+                        <option>Beginner</option>
+                        <option>Intermediate</option>
+                        <option>Advanced</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="hair-type" class="block text-gray-300 mb-2">My Hair Type:</label>
+                    <select id="hair-type" class="w-full p-3 rounded-lg bg-gray-800 text-gray-200">
+                        <option>Fine/Soft</option>
+                        <option>Medium</option>
+                        <option>Coarse/Thick</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="wave-goal" class="block text-gray-300 mb-2">My Main Goal:</label>
+                    <select id="wave-goal" class="w-full p-3 rounded-lg bg-gray-800 text-gray-200">
+                        <option>More Definition</option>
+                        <option>Deeper Waves</option>
+                        <option>Better Crown</option>
+                        <option>Eliminate Forks</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="desired-pattern" class="block text-gray-300 mb-2">My Desired Pattern:</label>
+                    <select id="desired-pattern" class="w-full p-3 rounded-lg bg-gray-800 text-gray-200">
+                        <option>360 Waves</option>
+                        <option>540 Waves</option>
+                        <option>720 Waves</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition-colors">Create My Routine</button>
+            </form>
+            <div id="routine-response-container" class="card mt-6 hidden">
+                <div id="routine-response" class="text-lg text-gray-200"></div>
+            </div>
+            <div id="routine-loading-indicator" class="hidden text-center mt-6">
+                <p class="loading-indicator text-cyan-400 text-lg">Crafting your routine...</p>
+            </div>
+        </section>
+
+        <section id="community" class="card">
+            <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">Community Wisdom ✨</h2>
+            <p class="text-center text-gray-300 mb-6">Share your best tip and help other wavers on their journey.</p>
+            <form id="wave-tip-form" class="space-y-4 max-w-2xl mx-auto">
+                <div>
+                    <label for="community-name" class="block text-gray-300 mb-2">Your Name/Alias:</label>
+                    <input type="text" id="community-name" required class="w-full p-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                </div>
+                <div>
+                    <label for="wave-content" class="block text-gray-300 mb-2">Your Wave Tip:</label>
+                    <textarea id="wave-content" rows="4" required class="w-full p-3 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-teal-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-teal-700 transition-colors">Share Wisdom</button>
+            </form>
+            <div id="community-tips-display" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                </div>
+            <p id="no-tips-message" class="text-center text-gray-400 italic mt-8">Be the first to share a tip!</p>
+        </section>
+
+        <section id="gauntlet" class="card">
+            <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">The Gauntlet: Waver Hall of Fame🏆</h2>
+            <p class="text-center text-gray-300 mb-6">Check out the top wavers and their journey stories.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(1)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 1</h4>
+                    <p class="text-gray-400">Team: Elite Waves</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(2)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 2</h4>
+                    <p class="text-gray-400">Team: The Wave Gods</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(3)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 3</h4>
+                    <p class="text-gray-400">Team: Crown Control</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(4)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 4</h4>
+                    <p class="text-gray-400">Team: The Gauntlet</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(5)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 5</h4>
+                    <p class="text-gray-400">Team: Wave Chasers</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(6)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 6</h4>
+                    <p class="text-gray-400">Team: Master Combers</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(7)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 7</h4>
+                    <p class="text-gray-400">Team: Spiral Kings</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(8)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 8</h4>
+                    <p class="text-gray-400">Team: The Unravelers</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(9)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 9</h4>
+                    <p class="text-gray-400">Team: Deep Tides</p>
+                </div>
+                <div class="card text-center cursor-pointer hover:bg-gray-700 transition-colors" onclick="showWaverDetails(10)">
+                    <h4 class="text-xl font-bold text-cyan-400">Waver 10</h4>
+                    <p class="text-gray-400">Team: The Monarchs</p>
+                </div>
+            </div>
+        </section>
+    
+        <section id="products" class="card">
+            <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">Our Premium Brushes 🪮</h2>
+            <p class="text-center text-gray-300 mb-6">Invest in the right tools for your waves.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card text-center">
+                    <h3 class="text-xl font-bold text-cyan-400">The Hard Bristle Brush</h3>
+                    <p class="text-gray-400 mt-2">Perfect for coarse hair, designed for maximum pull.</p>
+                    <button onclick="purchaseBrush('Hard Bristle Brush')" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-full font-bold hover:bg-purple-700 transition-colors">Add to Cart</button>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-xl font-bold text-cyan-400">The Medium Bristle Brush</h3>
+                    <p class="text-gray-400 mt-2">The all-purpose tool for most wave patterns.</p>
+                    <button onclick="purchaseBrush('Medium Bristle Brush')" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-full font-bold hover:bg-purple-700 transition-colors">Add to Cart</button>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-xl font-bold text-cyan-400">The Soft Bristle Brush</h3>
+                    <p class="text-gray-400 mt-2">Ideal for laying down frizz and adding shine.</p>
+                    <button onclick="purchaseBrush('Soft Bristle Brush')" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-full font-bold hover:bg-purple-700 transition-colors">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="waverModal" class="modal hidden">
+        <div class="modal-content text-center">
+            <button onclick="closeModal('waverModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h3 id="waverName" class="text-2xl font-bold text-cyan-400 mb-2"></h3>
+            <p id="waverTeam" class="text-gray-300 mb-1"></p>
+            <p id="waverOrigin" class="text-gray-300"></p>
+        </div>
+    </div>
+
+    <div id="toast-notification" class="toast"></div>
+
+    <footer class="bg-gray-800 text-gray-400 text-center py-6 mt-12">
+        <p>&copy; 2025 Wave Guru. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
