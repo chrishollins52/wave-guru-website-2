@@ -57,7 +57,7 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
     mainAiLoadingIndicator.classList.remove('hidden');
     mainAiResponseContainer.classList.add('hidden');
 
-    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
+    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCyNo8o1cs91I'; 
     const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
     try {
