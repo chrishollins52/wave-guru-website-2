@@ -121,4 +121,76 @@
             <div id="routine-response-container" class="glass-card hidden mt-6">
                 <div id="routine-response" class="response-text"></div>
             </div>
-            <div id="routine-loading-indicator" class="
+            <div id="routine-loading-indicator" class="loading-spinner hidden mt-6"></div>
+        </section>
+
+        <section id="gauntlet" class="py-24">
+            <h2 class="section-title">Guru AI :: Top Tier Wavers</h2>
+            <p class="text-center text-gray-400 mt-4 mb-12">Prove your dominance. Earn your rank in the global registry.</p>
+            <div id="wavers-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                </div>
+        </section>
+
+        <section id="community" class="py-24">
+            <h2 class="section-title">Community :: Data Stream</h2>
+            <p class="text-center text-gray-400 mt-4 mb-12">Share your wave data and connect with fellow wavers.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="glass-card">
+                    <h3 class="card-title">Share Wave Data</h3>
+                    <p class="card-description">Contribute your knowledge to the collective wave consciousness.</p>
+                    <form id="wave-tip-form" class="mt-6 space-y-4">
+                        <input type="text" id="community-name" placeholder="[YOUR HANDLE]" class="input-field">
+                        <textarea id="wave-content" rows="4" placeholder="[WAVE PROTOCOL DATA INPUT]" class="input-field"></textarea>
+                        <button type="submit" class="cta-button w-full">TRANSMIT DATA</button>
+                    </form>
+                </div>
+                <div class="glass-card">
+                    <h3 class="card-title">Active Data Feed</h3>
+                    <div id="community-tips-display" class="space-y-4">
+                        <p id="no-tips-message" class="text-center text-gray-600 italic">:: WAITING FOR DATA INPUT ::</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="armory" class="py-24">
+            <h2 class="section-title">The Armory :: Essential Hardware</h2>
+            <p class="text-center text-gray-400 mt-4 mb-12">Equip yourself with the tools for optimal wave production.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="glass-card">
+                    <h3 class="card-title">Hard Bristle Brush</h3>
+                    <p class="card-description">Designed for maximum pull on coarse hair.</p>
+                    <button onclick="purchaseBrush('HARD BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
+                </div>
+                <div class="glass-card">
+                    <h3 class="card-title">Medium Bristle Brush</h3>
+                    <p class="card-description">The all-purpose tool for most wave patterns.</p>
+                    <button onclick="purchaseBrush('MEDIUM BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
+                </div>
+                <div class="glass-card">
+                    <h3 class="card-title">Soft Bristle Brush</h3>
+                    <p class="card-description">Ideal for laying down frizz and adding shine.</p>
+                    <button onclick="purchaseBrush('SOFT BRISTLE BRUSH')" class="cta-button w-full mt-4">ACQUIRE TOOL</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="text-gray-400">:: ASK GURU 2025 :: ALL PROTOCOLS RESERVED ::</p>
+    </footer>
+
+    <div id="toast-notification" class="toast-notification"></div>
+
+    <div id="waverModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('waverModal')">&times;</span>
+            <h3 id="waverName" class="text-2xl font-bold mb-2 text-cyan-400"></h3>
+            <p id="waverTeam" class="text-gray-300 mb-1"></p>
+            <p id="waverOrigin" class="text-gray-300"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
