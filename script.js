@@ -58,10 +58,7 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
     mainAiLoadingIndicator.classList.remove('hidden');
     mainAiResponseContainer.classList.add('hidden');
 
-    // **API Key from your console**
     const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
-    
-    // **API Endpoint from your curl command**
     const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
     try {
@@ -69,11 +66,9 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // The API key is passed in the header, as shown in the curl command.
                 'X-goog-api-key': apiKey
             },
             body: JSON.stringify({
-                // The request body matches the format required by the Gemini API.
                 contents: [{
                     parts: [{
                         text: question
@@ -83,7 +78,6 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
         });
 
         if (!response.ok) {
-            // Log the full error to the console for easier debugging
             const errorDetails = await response.text();
             console.error('API request failed:', response.status, errorDetails);
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -91,7 +85,6 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
 
         const data = await response.json();
         
-        // This is the correct path to extract the text from the Gemini API response.
         const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
 
         mainAiResponseDiv.textContent = aiResponse;
@@ -178,7 +171,7 @@ function displayTips() {
             tipCard.innerHTML = `
                 <h4 class="text-xl font-bold text-cyan-400 mb-2">${tip.name}</h4>
                 <p class="text-gray-300 italic mb-2">shared this wisdom:</p>
-                <p class="text-gray-200">${tip.content}</p>
+                <p class="text-200">${tip.content}</p>
             `;
             communityTipsDisplay.appendChild(tipCard);
         });
@@ -215,3 +208,70 @@ function purchaseBrush(productName) {
 }
 
 window.purchaseBrush = purchaseBrush;
+
+// --- NEW FEATURES: Routine Timer and Progress Tracker ---
+
+// Routine Timer Logic
+let timer;
+let seconds = 0;
+const timerDisplay = document.getElementById('timer-display');
+const startTimerBtn = document.getElementById('start-timer-btn');
+const stopTimerBtn = document.getElementById('stop-timer-btn');
+const resetTimerBtn = document.getElementById('reset-timer-btn');
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+}
+
+startTimerBtn.addEventListener('click', () => {
+    if (!timer) {
+        timer = setInterval(() => {
+            seconds++;
+            updateTimerDisplay();
+        }, 1000);
+        showToast('Timer started!');
+    }
+});
+
+stopTimerBtn.addEventListener('click', () => {
+    clearInterval(timer);
+    timer = null;
+    showToast('Timer stopped.');
+});
+
+resetTimerBtn.addEventListener('click', () => {
+    clearInterval(timer);
+    timer = null;
+    seconds = 0;
+    updateTimerDisplay();
+    showToast('Timer reset.');
+});
+
+
+// Progress Tracker Logic
+const progressForm = document.getElementById('progress-form');
+const progressImagesContainer = document.getElementById('progress-images-container');
+
+progressForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const imageFile = document.getElementById('progress-image').files[0];
+    const date = new Date().toLocaleDateString();
+
+    if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imageUrl = event.target.result;
+            const progressCard = document.createElement('div');
+            progressCard.className = 'card text-center';
+            progressCard.innerHTML = `
+                <img src="${imageUrl}" alt="Wave Progress" class="w-full h-auto rounded-lg mb-2">
+                <p class="text-gray-400 text-sm">Date: ${date}</p>
+            `;
+            progressImagesContainer.appendChild(progressCard);
+            showToast('Progress photo added!');
+        };
+        reader.readAsDataURL(imageFile);
+    }
+});
