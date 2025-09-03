@@ -1,110 +1,177 @@
-/* Custom styles for the Inter font and futuristic color scheme */
+/* A modern, dark, and clean color palette */
+:root {
+    --bg-color: #0d1117;
+    --card-bg: #161b22;
+    --text-primary: #f0f6fc;
+    --text-secondary: #c9d1d9;
+    --accent-color: #38a3a5;
+    --accent-hover: #4dc2c4;
+}
+
 body {
     font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
-    background-color: #1a1a2e; /* Deep Space Blue/Purple Background */
-    color: #e0e0e0; /* Light Gray text */
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 2rem;
+    line-height: 1.6;
 }
-/* Style for interactive buttons/links */
-.btn-primary {
-    @apply inline-block px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full shadow-lg hover:from-cyan-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105;
-}
-.btn-secondary {
-    @apply inline-block px-8 py-3 text-lg font-semibold text-cyan-400 border-2 border-cyan-400 rounded-full hover:bg-cyan-900 hover:bg-opacity-20 transition duration-300 ease-in-out transform hover:scale-105;
-}
-.section-heading {
-    @apply text-5xl font-extrabold text-white mb-6;
-}
-.card {
-    @apply bg-gray-900 bg-opacity-70 backdrop-blur-md rounded-xl shadow-lg p-8 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl border border-gray-700;
-}
-/* Keyframes for animations */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-@keyframes pulseSlow {
-    0%, 100% { transform: scale(1); opacity: 0.1; }
-    50% { transform: scale(1.2); opacity: 0.2; }
-}
-.animate-fade-in-down { animation: fadeInDown 1s ease-out forwards; }
-.animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; }
-.animate-fade-in { animation: fadeIn 1s ease-out forwards; animation-delay: 0.6s; }
-.animate-pulse-slow { animation: pulseSlow 6s infinite ease-in-out; }
 
-/* Slideshow specific styles */
-.slideshow-container {
-    position: relative;
-    max-width: 800px;
-    margin: auto;
-    border-radius: 1rem; /* rounded-xl */
-    overflow: hidden;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-    border: 1px solid #4a4a4a; /* border-gray-700 */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
 }
-.mySlides {
+
+.header, .footer {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid #30363d;
+}
+
+h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+/* Form and input styles */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #010409;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    color: var(--text-primary);
+    transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background-color: #585858;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Community tips display */
+#community-tips-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+#community-tips-display .card {
+    background-color: #0c1016;
+    border: 1px solid #2d343a;
+    padding: 1.5rem;
+}
+
+/* Toast Notification */
+#toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+    z-index: 1000;
+}
+
+#toast-notification.show {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+/* Mobile menu */
+#mobile-menu-btn {
     display: none;
 }
-.mySlides img {
-    width: 100%;
-    display: block;
-    border-radius: 1rem; /* Inherit from container */
-}
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-.text-slide {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 0 0 1rem 1rem;
-}
-.dots-container {
-    text-align: center;
-    padding: 20px;
-}
-.dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-.active-dot, .dot:hover {
-    background-color: #717171;
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    #mobile-menu-btn {
+        display: block;
+    }
+    .desktop-nav {
+        display: none;
+    }
+    #mobile-menu.hidden {
+        display: none;
+    }
 }
