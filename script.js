@@ -1,5 +1,20 @@
 // --- Global State and Utility Functions ---
-let waveTips = []; 
+// Use global variables for Firebase configuration and authentication token
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+// --- Firebase Imports and Initialization ---
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { getAuth, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+let db, auth;
+let userId;
+
+// This will store the data from Firestore
+let waveTips = [];
+
 let waverData = [
     { id: 1, name: 'Waver 1', team: 'Team: Elite Waves', origin: 'Origin: Los Angeles, CA' },
     { id: 2, name: 'Waver 2', team: 'Team: The Wave Gods', origin: 'Origin: New York, NY' },
@@ -25,6 +40,10 @@ function closeModal(id) {
 
 function showToast(message) {
     const toast = document.getElementById('toast-notification');
+    if (!toast) {
+        console.error("Toast notification element not found.");
+        return;
+    }
     toast.textContent = message;
     toast.classList.add('show');
     setTimeout(() => {
@@ -36,9 +55,12 @@ function showToast(message) {
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-});
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+}
+
 
 // --- Ask Guru AI (Main Section) ---
 const mainAskGuruForm = document.getElementById('main-ask-guru-form');
@@ -48,63 +70,61 @@ const mainAiResponseDiv = document.getElementById('main-ai-response');
 const mainAiLoadingIndicator = document.getElementById('main-ai-loading-indicator');
 
 // This entire block has been updated with the correct API information.
-mainAskGuruForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const question = mainAiQuestionInput.value.trim();
-    if (question === '') {
-        return;
-    }
-
-    mainAiLoadingIndicator.classList.remove('hidden');
-    mainAiResponseContainer.classList.add('hidden');
-
-    // **API Key from your console**
-    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
-     
-    // **API Endpoint from your curl command**
-    const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
-
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // The API key is passed in the header, as shown in the curl command.
-                'X-goog-api-key': apiKey
-            },
-            body: JSON.stringify({
-                // The request body matches the format required by the Gemini API.
-                contents: [{
-                    parts: [{
-                        text: question
-                    }]
-                }]
-            })
-        });
-
-        if (!response.ok) {
-            // Log the full error to the console for easier debugging
-            const errorDetails = await response.text();
-            console.error('API request failed:', response.status, errorDetails);
-            throw new Error(`HTTP error! status: ${response.status}`);
+if (mainAskGuruForm && mainAiQuestionInput) {
+    mainAskGuruForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const question = mainAiQuestionInput.value.trim();
+        if (question === '') {
+            return;
         }
 
-        const data = await response.json();
-         
-        // This is the correct path to extract the text from the Gemini API response.
-        const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
+        if (mainAiLoadingIndicator) mainAiLoadingIndicator.classList.remove('hidden');
+        if (mainAiResponseContainer) mainAiResponseContainer.classList.add('hidden');
 
-        mainAiResponseDiv.textContent = aiResponse;
+        // **API Key is now empty as it is provided by the environment**
+        const apiKey = '';
+            
+        // **Updated API Endpoint to the correct Gemini model**
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-    } catch (error) {
-        mainAiResponseDiv.textContent = `Sorry, an error occurred: ${error.message}. Please check the console for details.`;
-        console.error('Error fetching data from API:', error);
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: question
+                        }]
+                    }]
+                })
+            });
 
-    } finally {
-        mainAiLoadingIndicator.classList.add('hidden');
-        mainAiResponseContainer.classList.remove('hidden');
-    }
-});
+            if (!response.ok) {
+                const errorDetails = await response.text();
+                console.error('API request failed:', response.status, errorDetails);
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
+
+            if (mainAiResponseDiv) mainAiResponseDiv.textContent = aiResponse;
+
+        } catch (error) {
+            if (mainAiResponseDiv) mainAiResponseDiv.textContent = `Sorry, an error occurred: ${error.message}. Please check the console for details.`;
+            console.error('Error fetching data from API:', error);
+
+        } finally {
+            if (mainAiLoadingIndicator) mainAiLoadingIndicator.classList.add('hidden');
+            if (mainAiResponseContainer) mainAiResponseContainer.classList.remove('hidden');
+        }
+    });
+}
+
 
 // --- Wave Journey Planner ---
 const journeyForm = document.getElementById('wave-routine-form');
@@ -112,62 +132,77 @@ const routineLoadingIndicator = document.getElementById('routine-loading-indicat
 const routineResponseContainer = document.getElementById('routine-response-container');
 const routineResponseDiv = document.getElementById('routine-response');
 
-journeyForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    routineLoadingIndicator.classList.remove('hidden');
-    routineResponseContainer.classList.add('hidden');
+if (journeyForm) {
+    journeyForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (routineLoadingIndicator) routineLoadingIndicator.classList.remove('hidden');
+        if (routineResponseContainer) routineResponseContainer.classList.add('hidden');
 
-    const stage = document.getElementById('wave-stage').value;
-    const hairType = document.getElementById('hair-type').value;
-    const goal = document.getElementById('wave-goal').value;
-    const pattern = document.getElementById('desired-pattern').value;
+        const stage = document.getElementById('wave-stage').value;
+        const hairType = document.getElementById('hair-type').value;
+        const goal = document.getElementById('wave-goal').value;
+        const pattern = document.getElementById('desired-pattern').value;
 
-    setTimeout(() => {
-        let brushRecommendation = "a Medium Bristle Brush";
-        if (hairType === "Coarse/Thick") {
-            brushRecommendation = "a Hard Bristle Brush";
-        } else if (hairType === "Fine/Soft") {
-            brushRecommendation = "a Soft Bristle Brush";
-        }
+        setTimeout(() => {
+            let brushRecommendation = "a Medium Bristle Brush";
+            if (hairType === "Coarse/Thick") {
+                brushRecommendation = "a Hard Bristle Brush";
+            } else if (hairType === "Fine/Soft") {
+                brushRecommendation = "a Soft Bristle Brush";
+            }
 
-        const routineResponse = `
-            <h4 class="text-xl font-bold text-cyan-400">Your Guru Routine for ${pattern}:</h4>
-            <p>Based on your current stage as a <strong>${stage}</strong> with <strong>${hairType}</strong> hair, here is your personalized plan:</p>
-            <ol class="list-decimal list-inside mt-4 space-y-2 text-gray-200">
-                <li><strong>Daily Brushing:</strong> Use ${brushRecommendation} for at least 30 minutes a day, divided into sessions. Consistent, even strokes are vital for your ${pattern} pattern.</li>
-                <li><strong>Washing:</strong> Wash your hair once a week with a moisturizing, sulfate-free shampoo. Brush with the shampoo in your hair to lay it down.</li>
-                <li><strong>Compression:</strong> A durag or wave cap is your best friend. Wear it at all times when not brushing, especially at night.</li>
-                <li><strong>Moisturizing:</strong> Apply a small amount of pomade or shea butter to keep your waves laid and healthy.</li>
-            </ol>
-            <p class="mt-4 italic">Remember, "Rome wasn't built in a day." Your goal of "${goal}" is achievable with dedication!</p>
-        `;
-        routineResponseDiv.innerHTML = routineResponse;
-        routineLoadingIndicator.classList.add('hidden');
-        routineResponseContainer.classList.remove('hidden');
-    }, 2000);
-});
+            const routineResponse = `
+                <h4 class="text-xl font-bold text-cyan-400">Your Guru Routine for ${pattern}:</h4>
+                <p>Based on your current stage as a <strong>${stage}</strong> with <strong>${hairType}</strong> hair, here is your personalized plan:</p>
+                <ol class="list-decimal list-inside mt-4 space-y-2 text-gray-200">
+                    <li><strong>Daily Brushing:</strong> Use ${brushRecommendation} for at least 30 minutes a day, divided into sessions. Consistent, even strokes are vital for your ${pattern} pattern.</li>
+                    <li><strong>Washing:</strong> Wash your hair once a week with a moisturizing, sulfate-free shampoo. Brush with the shampoo in your hair to lay it down.</li>
+                    <li><strong>Compression:</strong> A durag or wave cap is your best friend. Wear it at all times when not brushing, especially at night.</li>
+                    <li><strong>Moisturizing:</strong> Apply a small amount of pomade or shea butter to keep your waves laid and healthy.</li>
+                </ol>
+                <p class="mt-4 italic">Remember, "Rome wasn't built in a day." Your goal of "${goal}" is achievable with dedication!</p>
+            `;
+            if (routineResponseDiv) routineResponseDiv.innerHTML = routineResponse;
+            if (routineLoadingIndicator) routineLoadingIndicator.classList.add('hidden');
+            if (routineResponseContainer) routineResponseContainer.classList.remove('hidden');
+        }, 2000);
+    });
+}
 
-// --- Community Section ---
+// --- Community Section (Updated for Firestore) ---
 const waveTipForm = document.getElementById('wave-tip-form');
 const communityTipsDisplay = document.getElementById('community-tips-display');
 const noTipsMessage = document.getElementById('no-tips-message');
 
-waveTipForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('community-name').value;
-    const content = document.getElementById('wave-content').value;
+if (waveTipForm) {
+    waveTipForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('community-name').value;
+        const content = document.getElementById('wave-content').value;
 
-    const newTip = { name, content };
-    waveTips.push(newTip);
-    localStorage.setItem('waveTips', JSON.stringify(waveTips));
-
-    displayTips();
-    waveTipForm.reset();
-    showToast('Wisdom submitted successfully! 🙏');
-});
+        if (name && content) {
+            try {
+                // Add a new document to the "community_tips" collection in Firestore
+                await addDoc(collection(db, `artifacts/${appId}/public/data/community_tips`), {
+                    name: name,
+                    content: content,
+                    userId: userId,
+                    timestamp: serverTimestamp()
+                });
+                showToast('Wisdom submitted successfully! 🙏');
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                showToast('Error submitting tip. Please try again.');
+            }
+        }
+        waveTipForm.reset();
+    });
+}
 
 function displayTips() {
-    communityTipsDisplay.innerHTML = ''; 
+    if (!communityTipsDisplay || !noTipsMessage) return;
+
+    communityTipsDisplay.innerHTML = '';
     if (waveTips.length === 0) {
         noTipsMessage.style.display = 'block';
     } else {
@@ -184,14 +219,6 @@ function displayTips() {
         });
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const storedTips = localStorage.getItem('waveTips');
-    if (storedTips) {
-        waveTips = JSON.parse(storedTips);
-    }
-    displayTips();
-});
 
 // --- The Gauntlet Section ---
 function showWaverDetails(id) {
@@ -223,56 +250,94 @@ const recipeResponseContainer = document.getElementById('recipe-response-contain
 const recipeResponseDiv = document.getElementById('recipe-response');
 const recipeLoadingIndicator = document.getElementById('recipe-loading-indicator');
 
-recipeForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const ingredients = recipeIngredientsInput.value.trim();
-    if (ingredients === '') {
-        return;
-    }
-
-    recipeLoadingIndicator.classList.remove('hidden');
-    recipeResponseContainer.classList.add('hidden');
-    
-    // Use the same API key and URL from the Ask Guru section
-    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; // Replace with your key
-    const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
-
-    // Construct a detailed prompt for the AI
-    const prompt = `Based on the following ingredients, create a detailed recipe for a natural hair pomade or product for deep waves: ${ingredients}. Include steps, measurements, and tips for application.`;
-
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-goog-api-key': apiKey
-            },
-            body: JSON.stringify({
-                contents: [{
-                    parts: [{
-                        text: prompt
-                    }]
-                }]
-            })
-        });
-
-        if (!response.ok) {
-            const errorDetails = await response.text();
-            console.error('API request failed:', response.status, errorDetails);
-            throw new Error(`HTTP error! status: ${response.status}`);
+if (recipeForm) {
+    recipeForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const ingredients = recipeIngredientsInput.value.trim();
+        if (ingredients === '') {
+            return;
         }
 
-        const data = await response.json();
-        const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
+        if (recipeLoadingIndicator) recipeLoadingIndicator.classList.remove('hidden');
+        if (recipeResponseContainer) recipeResponseContainer.classList.add('hidden');
+            
+        // Use the correct API key and URL from the Ask Guru section
+        const apiKey = '';
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-        recipeResponseDiv.textContent = aiResponse;
+        // Construct a detailed prompt for the AI
+        const prompt = `Based on the following ingredients, create a detailed recipe for a natural hair pomade or product for deep waves: ${ingredients}. Include steps, measurements, and tips for application.`;
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
+                    }]
+                })
+            });
+
+            if (!response.ok) {
+                const errorDetails = await response.text();
+                console.error('API request failed:', response.status, errorDetails);
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
+
+            if (recipeResponseDiv) recipeResponseDiv.textContent = aiResponse;
+
+        } catch (error) {
+            if (recipeResponseDiv) recipeResponseDiv.textContent = `Sorry, an error occurred: ${error.message}. Please check the console for details.`;
+            console.error('Error fetching data from API:', error);
+
+        } finally {
+            if (recipeLoadingIndicator) recipeLoadingIndicator.classList.add('hidden');
+            if (recipeResponseContainer) recipeResponseContainer.classList.remove('hidden');
+        }
+    });
+}
+
+// --- Main execution block ---
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize Firebase app and services
+    if (!firebaseConfig) {
+        console.error("Firebase config is not defined. Cannot initialize app.");
+        return;
+    }
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    auth = getAuth(app);
+
+    try {
+        // Authenticate the user. If a custom token is available, use it. Otherwise, sign in anonymously.
+        if (initialAuthToken) {
+            await signInWithCustomToken(auth, initialAuthToken);
+        } else {
+            await signInAnonymously(auth);
+        }
+        userId = auth.currentUser.uid;
+        console.log(`Authenticated with user ID: ${userId}`);
+
+        // Set up real-time listener for community tips in the public data space
+        const q = query(collection(db, `artifacts/${appId}/public/data/community_tips`));
+        onSnapshot(q, (querySnapshot) => {
+            waveTips = [];
+            querySnapshot.forEach((doc) => {
+                waveTips.push({ id: doc.id, ...doc.data() });
+            });
+            displayTips();
+        });
 
     } catch (error) {
-        recipeResponseDiv.textContent = `Sorry, an error occurred: ${error.message}. Please check the console for details.`;
-        console.error('Error fetching data from API:', error);
-
-    } finally {
-        recipeLoadingIndicator.classList.add('hidden');
-        recipeResponseContainer.classList.remove('hidden');
+        console.error("Firebase authentication failed: ", error);
+        alert("Authentication failed. The app may not function correctly. Check the console for more details.");
     }
 });
