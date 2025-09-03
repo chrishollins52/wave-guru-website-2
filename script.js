@@ -81,8 +81,8 @@ if (mainAskGuruForm && mainAiQuestionInput) {
         if (mainAiLoadingIndicator) mainAiLoadingIndicator.classList.remove('hidden');
         if (mainAiResponseContainer) mainAiResponseContainer.classList.add('hidden');
 
-        // **API Key is now empty as it is provided by the environment**
-        const apiKey = '';
+        // **API Key is now populated with the key you provided**
+        const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I';
             
         // **Updated API Endpoint to the correct Gemini model**
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
@@ -262,82 +262,8 @@ if (recipeForm) {
         if (recipeResponseContainer) recipeResponseContainer.classList.add('hidden');
             
         // Use the correct API key and URL from the Ask Guru section
-        const apiKey = '';
+        const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I';
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
         // Construct a detailed prompt for the AI
-        const prompt = `Based on the following ingredients, create a detailed recipe for a natural hair pomade or product for deep waves: ${ingredients}. Include steps, measurements, and tips for application.`;
-
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: prompt
-                        }]
-                    }]
-                })
-            });
-
-            if (!response.ok) {
-                const errorDetails = await response.text();
-                console.error('API request failed:', response.status, errorDetails);
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
-
-            if (recipeResponseDiv) recipeResponseDiv.textContent = aiResponse;
-
-        } catch (error) {
-            if (recipeResponseDiv) recipeResponseDiv.textContent = `Sorry, an error occurred: ${error.message}. Please check the console for details.`;
-            console.error('Error fetching data from API:', error);
-
-        } finally {
-            if (recipeLoadingIndicator) recipeLoadingIndicator.classList.add('hidden');
-            if (recipeResponseContainer) recipeResponseContainer.classList.remove('hidden');
-        }
-    });
-}
-
-// --- Main execution block ---
-document.addEventListener('DOMContentLoaded', async () => {
-    // Initialize Firebase app and services
-    if (!firebaseConfig) {
-        console.error("Firebase config is not defined. Cannot initialize app.");
-        return;
-    }
-    const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-    auth = getAuth(app);
-
-    try {
-        // Authenticate the user. If a custom token is available, use it. Otherwise, sign in anonymously.
-        if (initialAuthToken) {
-            await signInWithCustomToken(auth, initialAuthToken);
-        } else {
-            await signInAnonymously(auth);
-        }
-        userId = auth.currentUser.uid;
-        console.log(`Authenticated with user ID: ${userId}`);
-
-        // Set up real-time listener for community tips in the public data space
-        const q = query(collection(db, `artifacts/${appId}/public/data/community_tips`));
-        onSnapshot(q, (querySnapshot) => {
-            waveTips = [];
-            querySnapshot.forEach((doc) => {
-                waveTips.push({ id: doc.id, ...doc.data() });
-            });
-            displayTips();
-        });
-
-    } catch (error) {
-        console.error("Firebase authentication failed: ", error);
-        showToast("Authentication failed. The app may not function correctly. Check the console for more details.");
-    }
-});
+        const prompt = `Based on the following ingredients, create a detailed recipe for a natural hair pomade or product for deep waves: ${ingredients}. Include steps, measurements, and tips
