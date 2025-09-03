@@ -1,717 +1,797 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-900 text-gray-200">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guru Brushes - The Future of 360 Waves</title>
+    <title>Ask Guru</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom styles for the Inter font and futuristic color scheme */
         body {
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #1a1a2e; /* Deep Space Blue/Purple Background */
-            color: #e0e0e0; /* Light Gray text */
+            background-color: #0d1117;
         }
-        /* Style for interactive buttons/links */
-        .btn-primary {
-            display: inline-block;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: white;
-            background-image: linear-gradient(to right, var(--tw-gradient-stops));
-            --tw-gradient-from: #06b6d4;
-            --tw-gradient-to: #2563eb;
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            border-radius: 9999px;
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            transition-duration: 300ms;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-property: all;
-            transform: scale(1);
-        }
-        .btn-primary:hover {
-            --tw-gradient-from: #0891b2;
-            --tw-gradient-to: #1d4ed8;
-            transform: scale(1.05);
-        }
-        .btn-secondary {
-            display: inline-block;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #22d3ee;
-            border-width: 2px;
-            border-color: #22d3ee;
-            border-radius: 9999px;
-            transition-duration: 300ms;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-property: all;
-            transform: scale(1);
-        }
-        .btn-secondary:hover {
-            background-color: #0c4a6e;
-            background-color: rgba(12, 74, 110, 0.2);
-            transform: scale(1.05);
-        }
-        .section-heading {
-            font-size: 3rem;
-            line-height: 1;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 1.5rem;
-        }
+
         .card {
-            background-color: rgb(17 24 39 / 0.7);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            padding: 2rem;
-            transform: scale(1);
-            transition-duration: 300ms;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-property: all;
-            border: 1px solid #4a4a4a;
+            background-color: #161b22;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #30363d;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s;
         }
+
         .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            transform: translateY(-5px);
         }
-        /* Keyframes for animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes pulseSlow {
-            0%, 100% { transform: scale(1); opacity: 0.1; }
-            50% { transform: scale(1.2); opacity: 0.2; }
-        }
-        .animate-fade-in-down { animation: fadeInDown 1s ease-out forwards; }
-        .animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; }
-        .animate-fade-in { animation: fadeIn 1s ease-out forwards; animation-delay: 0.6s; }
-        .animate-pulse-slow { animation: pulseSlow 6s infinite ease-in-out; }
-        /* Slideshow specific styles */
-        .slideshow-container {
-            position: relative;
-            max-width: 800px;
-            margin: auto;
-            border-radius: 1rem; /* rounded-xl */
-            overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-            border: 1px solid #4a4a4a; /* border-gray-700 */
-        }
-        .mySlides {
-            display: none;
-        }
-        .mySlides img {
-            width: 100%;
-            display: block;
-            border-radius: 1rem; /* Inherit from container */
-        }
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -22px;
+        
+        .btn-primary {
+            background-color: #0891b2;
             color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            background-color: rgba(0, 0, 0, 0.5);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
         }
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
+
+        .btn-primary:hover {
+            background-color: #0e7490;
         }
-        .prev:hover, .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        .text-slide {
-            color: #f2f2f2;
-            font-size: 15px;
-            padding: 8px 12px;
-            position: absolute;
-            bottom: 8px;
+        
+        .input-field {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            color: #c9d1d9;
             width: 100%;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 0 0 1rem 1rem;
         }
-        .dots-container {
-            text-align: center;
-            padding: 20px;
+        
+        /* Specific styles for the dropdown arrows */
+        select.input-field {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23c9d1d9" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.5em;
+            padding-right: 2.5rem;
         }
-        .dot {
-            cursor: pointer;
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .active-dot, .dot:hover {
-            background-color: #717171;
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: #161b22;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            border: 1px solid #30363d;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        /* Toast styles */
+        #toast-notification {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0891b2;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #toast-notification.show {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
-<body class="text-gray-100">
+<body class="font-inter">
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 z-50 flex flex-col items-center justify-center space-y-8 text-xl">
+        <a href="#ask-guru" class="text-cyan-400 hover:text-cyan-200">Ask Guru</a>
+        <a href="#guru-tools" class="text-cyan-400 hover:text-cyan-200">Guru Tools</a>
+        <a href="#wave-journey" class="text-cyan-400 hover:text-cyan-200">Wave Journey</a>
+        <a href="#community" class="text-cyan-400 hover:text-cyan-200">Community</a>
+        <a href="#products" class="text-cyan-400 hover:text-cyan-200">Products</a>
+        <a href="#contact" class="text-cyan-400 hover:text-cyan-200">Contact</a>
+    </div>
 
-    <nav class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-lg py-4 px-6 md:px-12 fixed w-full z-20 top-0 border-b border-gray-700">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2">
-                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-10 h-10">
-                    <path d="M50 0C22.386 0 0 22.386 0 50C0 77.614 22.386 100 50 100C77.614 100 100 77.614 100 50C100 22.386 77.614 0 50 0ZM50 10C72.091 10 90 27.909 90 50C90 72.091 72.091 90 50 90C27.909 90 10 72.091 10 50C10 27.909 27.909 10 50 10Z" fill="url(#paint0_linear)"/>
-                    <path d="M50 20L75 50L50 80L25 50L50 20Z" fill="url(#paint1_linear)"/>
-                    <path d="M50 35L65 50L50 65L35 50L50 35Z" fill="url(#paint2_linear)"/>
-                    <defs>
-                        <linearGradient id="paint0_linear" x1="50" y1="0" x2="50" y2="100" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#342e5d"/>
-                            <stop offset="1" stop-color="#1a1a2e"/>
-                        </linearGradient>
-                        <linearGradient id="paint1_linear" x1="50" y1="20" x2="50" y2="80" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#00ffff"/>
-                            <stop offset="1" stop-color="#007bff"/>
-                        </linearGradient>
-                        <linearGradient id="paint2_linear" x1="50" y1="35" x2="50" y2="65" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#ff00ff"/>
-                            <stop offset="1" stop-color="#8e24aa"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="text-3xl font-bold text-cyan-400 tracking-wide">GURU BRUSHES</span>
-            </a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="text-gray-300 hover:text-cyan-400 transition duration-300">Home</a>
-                <a href="#about" class="text-gray-300 hover:text-cyan-400 transition duration-300">About Us</a>
-                <a href="#products" class="text-gray-300 hover:text-cyan-400 transition duration-300">Products</a>
-                <a href="#wave-journey-planner" class="text-gray-300 hover:text-cyan-400 transition duration-300">Wave Journey</a>
-                <a href="#innovations" class="text-gray-300 hover:text-cyan-400 transition duration-300">Innovations</a>
-                <a href="#community" class="text-gray-300 hover:text-cyan-400 transition duration-300">Community</a>
-                <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition duration-300">Contact</a>
-            </div>
-            <button class="md:hidden text-gray-300 focus:outline-none" onclick="toggleMobileMenu()">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2 bg-gray-800 bg-opacity-90 rounded-lg p-4">
-            <a href="#home" class="block text-gray-300 hover:text-cyan-400 transition duration-300 py-2 px-4 rounded-md">Home</a>
-            <a href="#about" class="block text-gray-300 hover:text-cyan-400 transition duration-300 py-2 px-4 rounded-md">About Us</a>
-            <a href="#products" class="block text-gray-300 hover:text-cyan-400 transition duration-300 py-2 px-4 rounded-md">Products</a>
-            <a href="#wave-journey-planner" class="block text-gray-300 hover:text-cyan-400 transition duration-300 py-2 px-4 rounded-md">Wave Journey</a>
-            <a href="#innovations" class="block text-gray-300 hover:text-cyan-400 transition duration-300 py-2 px-4 rounded-md">Innovations</a>
-            <a href="#community" class="block text-gray-300 hover:text-cyan-400 transition duration-300 py-2 px-4 rounded-md">Community</a>
-            <a href="#contact" class="block text-gray-300 hover:text-cyan-400 transition duration-300 py-2 px-4 rounded-md">Contact</a>
-        </div>
-    </nav>
+    <!-- Header Navigation -->
+    <header class="p-6 md:p-8 flex items-center justify-between border-b border-gray-700 sticky top-0 z-40 bg-gray-900">
+        <h1 class="text-3xl md:text-4xl font-bold text-cyan-400">ASK GURU</h1>
+        <nav class="hidden md:flex space-x-8 text-lg font-medium">
+            <a href="#ask-guru" class="hover:text-cyan-400 transition">Home</a>
+            <a href="#guru-tools" class="hover:text-cyan-400 transition">Guru Tools</a>
+            <a href="#wave-journey" class="hover:text-cyan-400 transition">Wave Journey</a>
+            <a href="#community" class="hover:text-cyan-400 transition">Community</a>
+            <a href="#products" class="hover:text-cyan-400 transition">Products</a>
+            <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
+        </nav>
+        <button id="mobile-menu-btn" class="md:hidden text-cyan-400 text-3xl focus:outline-none">
+            &#9776;
+        </button>
+    </header>
 
-    <section id="home" class="relative bg-gradient-to-br from-indigo-900 to-purple-900 text-white min-h-screen flex items-center justify-center pt-20 pb-10 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-1/4 left-1/4 w-48 h-48 bg-cyan-400 opacity-10 rounded-full animate-pulse-slow"></div>
-            <div class="absolute bottom-1/3 right-1/3 w-32 h-32 bg-purple-400 opacity-10 rounded-full animate-pulse-slow delay-200"></div>
-            <div class="absolute top-2/3 right-1/4 w-64 h-64 bg-fuchsia-400 opacity-10 rounded-full animate-pulse-slow delay-400"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500 opacity-5 rounded-full filter blur-3xl"></div>
-        </div>
-        <div class="container mx-auto text-center px-4 relative z-10">
-            <div class="mb-8 animate-fade-in-down">
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto w-24 h-24">
-                    <path d="M50 0C22.386 0 0 22.386 0 50C0 77.614 22.386 100 50 100C77.614 100 100 77.614 100 50C100 22.386 77.614 0 50 0ZM50 10C72.091 10 90 27.909 90 50C90 72.091 72.091 90 50 90C27.909 90 10 72.091 10 50C10 27.909 27.909 10 50 10Z" fill="url(#heroPaint0_linear)"/>
-                    <path d="M50 20L75 50L50 80L25 50L50 20Z" fill="url(#heroPaint1_linear)"/>
-                    <path d="M50 35L65 50L50 65L35 50L50 35Z" fill="url(#heroPaint2_linear)"/>
-                    <defs>
-                        <linearGradient id="heroPaint0_linear" x1="50" y1="0" x2="50" y2="100" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#342e5d"/>
-                            <stop offset="1" stop-color="#1a1a2e"/>
-                        </linearGradient>
-                        <linearGradient id="heroPaint1_linear" x1="50" y1="20" x2="50" y2="80" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#00ffff"/>
-                            <stop offset="1" stop-color="#007bff"/>
-                        </linearGradient>
-                        <linearGradient id="heroPaint2_linear" x1="50" y1="35" x2="50" y2="65" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#ff00ff"/>
-                            <stop offset="1" stop-color="#8e24aa"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
-            <h1 class="text-6xl md:text-8xl font-extrabold leading-tight mb-6 animate-fade-in-down drop-shadow-lg">
-                <span class="text-fuchsia-400">GURU</span> <span class="text-cyan-400">BRUSHES</span>
-            </h1>
-            <p class="text-xl md:text-3xl mb-8 opacity-90 animate-fade-in-up">
-                Master Your Waves. Unleash Your Style.
-            </p>
-            <div class="space-x-4 animate-fade-in">
-                <a href="#products" class="btn-primary">Discover Our Wave Tools</a>
-                <a href="#contact" class="btn-secondary">Get in Touch</a>
-            </div>
-        </div>
-    </section>
+    <main class="container mx-auto p-6 md:p-12 space-y-16 lg:space-y-24">
 
-    <section id="about" class="py-16 md:py-24 bg-gray-900">
-        <div class="container mx-auto px-4 text-center max-w-4xl">
-            <h2 class="section-heading">About Guru Brushes</h2>
-            <div class="md:flex items-center justify-center gap-8">
-                <div class="w-full md:w-1/3 mb-8 md:mb-0">
-                    <img src="https://placehold.co/300x300/342e5d/00ffff?text=Guru+Logo" alt="Guru Brushes Logo" class="rounded-full mx-auto shadow-xl border-4 border-cyan-500">
+        <!-- Ask Guru Section -->
+        <section id="ask-guru" class="text-center space-y-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-cyan-400">Ask Guru</h2>
+            <p class="text-xl md:text-2xl font-medium text-gray-400 max-w-2xl mx-auto">Your AI-powered guide to flawless waves and ultimate scalp health.</p>
+            <div class="card max-w-3xl mx-auto space-y-4">
+                <h3 class="text-2xl font-semibold">Ask Guru says:</h3>
+                <div id="main-ai-response-container" class="space-y-4">
+                    <p id="main-ai-response" class="text-gray-400 text-sm italic">An error occurred. Please check your internet connection and try again.</p>
                 </div>
-                <div class="w-full md:w-2/3 text-lg leading-relaxed text-left text-gray-200">
-                    <p class="mb-4">
-                        At Guru Brushes, we are dedicated to perfecting the art of **360 waves**. Our mission is to combine cutting-edge design with premium materials to deliver brushes and hair care products that help you achieve and maintain the sharpest, deepest wave patterns. We understand the dedication it takes to lay those waves, and we're here to provide the ultimate tools.
-                    </p>
-                    <p class="mb-4">
-                        Driven by a passion for pristine waves, our team constantly researches and develops advanced bristle configurations, ergonomic brush handles, and nourishing hair formulations. We ensure every product enhances your natural wave potential and simplifies your grooming routine.
-                    </p>
-                    <p>
-                        From revolutionary brush designs for optimum compression to groundbreaking cleaning and conditioning solutions, Guru Brushes is dedicated to empowering wave enthusiasts and barbers alike. Join us on the journey to flawless waves.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="products" class="py-16 md:py-24 bg-gradient-to-br from-gray-800 to-gray-900">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="section-heading">Our Revolutionary Products</h2>
-            <p class="text-xl text-gray-300 mb-12">Experience the future of wave care.</p>
-
-            <div class="slideshow-container mb-16">
-                <div class="mySlides fade">
-                    <img src="https://placehold.co/800x450/4a2e5d/00ffff?text=Guru+Brush+Collection" alt="Guru Brush Collection">
-                    <div class="text-slide">Discover the perfect brush for your wave journey.</div>
-                </div>
-                <div class="mySlides fade">
-                    <img src="https://placehold.co/800x450/6a4c9c/ff00ff?text=Whip+Shampoo+Preview" alt="Whip Shampoo Preview">
-                    <div class="text-slide">Whip Shampoo: The ultimate lather for laid waves.</div>
-                </div>
-                <div class="mySlides fade">
-                    <img src="https://placehold.co/800x450/2a4a5a/6366f1?text=Hard+Brush+Action" alt="Hard Bristle Brush in Action">
-                    <div class="text-slide">Hard Bristle Brush: Deep compression for ultimate waves.</div>
-                </div>
-                <div class="mySlides fade">
-                    <img src="https://placehold.co/800x450/1a3a4a/a78bfa?text=Soft+Brush+Shine" alt="Soft Bristle Brush for Shine">
-                    <div class="text-slide">Soft Bristle Brush: Lay down frizz and add brilliant shine.</div>
-                </div>
-
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
-            <div class="dots-container">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                <div class="card border-fuchsia-500 shadow-xl shadow-fuchsia-500/30">
-                    <div class="text-fuchsia-400 mb-4">
-                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-2.414-2.414A1 1 0 0015.586 6H7a2 2 0 00-2 2v11a2 2 0 002 2zM10 7V4m0 0l-1-1m1 1l1-1m0 3v4"></path></svg>
+                <div id="main-ai-loading-indicator" class="hidden">
+                    <div class="flex justify-center items-center">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Loading...
                     </div>
-                    <h3 class="text-3xl font-bold text-fuchsia-400 mb-4 animate-pulse">Whip Shampoo - Coming Soon!</h3>
-                    <p class="text-gray-300 mb-4">
-                        Prepare for the ultimate wash. Our revolutionary **Whip Shampoo** creates a rich, cleansing lather that deeply purifies your scalp and hair, preparing your waves for optimal definition and shine. Formulated to be gentle yet effective.
-                    </p>
-                    <a href="#" class="btn-primary text-sm px-6 py-2 mt-4">Notify Me!</a>
                 </div>
-
-                <div class="card">
-                    <div class="text-cyan-400 mb-4">
-                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Hard Bristle Wave Brush</h3>
-                    <p class="text-gray-300">Designed for deeper wave patterns and stubborn hair. Provides powerful pull and excellent compression for ultimate wave development during daily brushing sessions.</p>
-                    <a href="#" class="btn-primary text-sm px-6 py-2 mt-4">Buy Now</a>
-                </div>
-
-                <div class="card">
-                    <div class="text-purple-400 mb-4">
-                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Medium Bristle Wave Brush</h3>
-                    <p class="text-gray-300">The versatile choice for all stages of wave development. Offers balanced firmness for consistent pull and comfortable brushing, ideal for daily grooming.</p>
-                    <a href="#" class="btn-primary text-sm px-6 py-2 mt-4">Buy Now</a>
-                </div>
-
-                <div class="card col-span-1 md:col-span-2 lg:col-span-1 mx-auto">
-                    <div class="text-blue-400 mb-4">
-                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h4c2.21 0 4-1.79 4-4s-1.79-4-4-4h-4c-2.21 0-4 1.79-4 4s1.79 4 4 4zM12 6V3m0 3a2 2 0 100 4 2 2 0 000-4z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Soft Bristle Wave Brush</h3>
-                    <p class="text-gray-300">Perfect for laying down the top layer of your waves and finishing. Gentle on the scalp, it adds shine and maintains your pattern without over-brushing.</p>
-                    <a href="#" class="btn-primary text-sm px-6 py-2 mt-4">Buy Now</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="wave-journey-planner" class="py-16 md:py-24 bg-gray-950 text-white">
-        <div class="container mx-auto px-4 text-center max-w-4xl">
-            <h2 class="section-heading">Your Personalized Wave Journey ✨</h2>
-            <p class="text-xl text-gray-300 mb-12">Let the Guru AI craft a custom wave routine just for you!</p>
-
-            <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-700 text-left">
-                <h3 class="text-3xl font-bold text-cyan-400 mb-6">Build Your Routine</h3>
-                <form id="wave-routine-form">
-                    <div class="mb-4">
-                        <label for="wave-stage" class="block text-gray-200 text-sm font-bold mb-2">Current Wave Stage:</label>
-                        <select id="wave-stage" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-cyan-500" required>
-                            <option value="">Select your stage</option>
-                            <option value="Beginner (just started)">Beginner (just started)</option>
-                            <option value="Intermediate (waves forming)">Intermediate (waves forming)</option>
-                            <option value="Advanced (consistent waves)">Advanced (consistent waves)</option>
-                            <option value="Wolfing (growing hair for deeper waves)">Wolfing (growing hair for deeper waves)</option>
-                            <option value="Maintaining (keeping waves sharp)">Maintaining (keeping waves sharp)</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="hair-type" class="block text-gray-200 text-sm font-bold mb-2">Hair Texture:</label>
-                        <select id="hair-type" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-cyan-500" required>
-                            <option value="">Select your hair type</option>
-                            <option value="Coarse/Thick">Coarse/Thick</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Fine/Soft">Fine/Soft</option>
-                        </select>
-                    </div>
-                    <div class="mb-6">
-                        <label for="wave-goal" class="block text-gray-200 text-sm font-bold mb-2">Your Wave Goals (e.g., deeper waves, fixing forks, more shine):</label>
-                        <textarea id="wave-goal" rows="4" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="I want to get my crown spinning and connect my waves." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary w-full">Get My Custom Routine ✨</button>
+                <form id="main-ask-guru-form" class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <input type="text" id="main-ai-question" class="input-field flex-grow" placeholder="What's the best way to brush for 360 waves?">
+                    <button type="submit" class="btn-primary">Ask Guru</button>
                 </form>
-                <div id="routine-loading-indicator" class="mt-4 text-center text-cyan-400 hidden">
-                    <p>Generating your custom wave journey... Please wait.</p>
-                </div>
-                <div id="routine-response-container" class="mt-6 p-4 bg-gray-700 rounded-lg hidden">
-                    <p class="text-gray-300 text-sm italic">Your Guru Routine:</p>
-                    <div id="routine-response" class="text-white mt-2 prose prose-invert max-w-none"></div>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="innovations" class="py-16 md:py-24 bg-gray-900">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="section-heading">Our Innovations</h2>
-            <p class="text-xl text-gray-300 mb-12">Witness the future of wave grooming through our latest breakthroughs.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card text-left">
-                    <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Smart+Brush+Tech" alt="Smart Brush Concept" class="rounded-lg mb-4 w-full h-auto border border-blue-600">
-                    <h3 class="text-xl font-bold mb-2 text-cyan-400">Smart Brush Technology</h3>
-                    <p class="text-gray-300 mb-4">Conceptual brush with integrated sensors to optimize brushing patterns and pressure for faster, more uniform wave development.</p>
-                    <a href="#" class="text-cyan-400 hover:underline font-semibold">View Concept &rarr;</a>
+        <!-- Guru Tools Section -->
+        <section id="guru-tools" class="space-y-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold">Guru Tools</h2>
+            <p class="text-xl md:text-2xl font-medium text-gray-400 max-w-2xl mx-auto">Interactive AI tools to elevate your wave game and scalp care.</p>
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <!-- AI Scalp Health Analyzer -->
+                <div class="card space-y-4">
+                    <h3 class="text-2xl font-bold text-cyan-400">AI Scalp Health Analyzer</h3>
+                    <p>Answer a few questions and let our AI analyze your scalp's condition, providing a health score and personalized advice.</p>
+                    <button id="launch-analyzer-btn" class="btn-primary inline-block">Launch Analyzer →</button>
                 </div>
-
-                <div class="card text-left">
-                    <img src="https://placehold.co/600x400/6366f1/ffffff?text=Scalp+Health+Analyzer" alt="Scalp Health Analyzer" class="rounded-lg mb-4 w-full h-auto border border-purple-600">
-                    <h3 class="text-xl font-bold mb-2 text-purple-400">Scalp Health Analyzer</h3>
-                    <p class="text-gray-300 mb-4">A glimpse into personalized hair care with devices that analyze scalp health and recommend tailored product regimens for optimal waves.</p>
-                    <a href="#" class="text-purple-400 hover:underline font-semibold">See Demo &rarr;</a>
-                </div>
-
-                <div class="card text-left">
-                    <img src="https://placehold.co/600x400/ef4444/ffffff?text=Eco-Friendly+Formulas" alt="Eco-Friendly Formulas" class="rounded-lg mb-4 w-full h-auto border border-red-600">
-                    <h3 class="text-xl font-bold mb-2 text-fuchsia-400">Eco-Friendly Wave Formulations</h3>
-                    <p class="text-gray-300 mb-4">Our commitment to sustainability: developing effective wave products with biodegradable ingredients and minimal environmental impact.</p>
-                    <a href="#" class="text-fuchsia-400 hover:underline font-semibold">Learn More &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="community" class="py-16 md:py-24 bg-gradient-to-br from-indigo-900 to-purple-900 text-white">
-        <div class="container mx-auto px-4 text-center max-w-4xl">
-            <h2 class="section-heading">Community: Share & Learn</h2>
-            <p class="text-xl text-gray-300 mb-12">Connect with fellow wavers, share your wisdom, and get insights from the Ask Guru AI.</p>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-700 text-left">
-                    <h3 class="text-3xl font-bold text-cyan-400 mb-6">Share Your Wave Wisdom</h3>
-                    <p class="text-gray-300 mb-6">Help the community grow by sharing your best wave tips or personal success stories!</p>
-                    <form id="wave-tip-form">
-                        <div class="mb-4">
-                            <label for="community-name" class="block text-gray-200 text-sm font-bold mb-2">Your Name/Handle</label>
-                            <input type="text" id="community-name" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Wave Lord" required>
-                        </div>
-                        <div class="mb-6">
-                            <label for="wave-content" class="block text-gray-200 text-sm font-bold mb-2">Your Tip or Story</label>
-                            <textarea id="wave-content" rows="6" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="My secret for deep waves is..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary w-full">Submit My Wisdom</button>
+                <!-- DIY Natural Product Recipes -->
+                <div class="card space-y-4">
+                    <h3 class="text-2xl font-bold text-cyan-400">DIY Natural Product Recipes</h3>
+                    <p>Ask our AI for recipes to create your own all-natural wave products using simple, common ingredients.</p>
+                    <form id="recipe-form" class="space-y-4">
+                        <input type="text" id="recipe-ingredients" class="input-field" placeholder="E.g., coconut oil, shea butter, castor oil">
+                        <button type="submit" class="btn-primary w-full">Get Recipes ✨</button>
                     </form>
-                    <div id="form-message" class="mt-4 text-center text-sm font-semibold"></div>
-                </div>
-
-                <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-700 text-left">
-                    <h3 class="text-3xl font-bold text-fuchsia-400 mb-6">Ask Guru</h3>
-                    <p class="text-gray-300 mb-6">Get personalized wave tips and advice powered by community insights and advanced AI.</p>
-                    <div class="mb-4">
-                        <label for="ai-question" class="block text-gray-200 text-sm font-bold mb-2">Your Question</label>
-                        <input type="text" id="ai-question" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-fuchsia-500" placeholder="How do I get rid of forks?">
-                    </div>
-                    <button id="ask-ai-btn" class="btn-primary w-full">Ask the Guru</button>
-                    <div id="ai-response-container" class="mt-6 p-4 bg-gray-700 rounded-lg hidden">
-                        <p class="text-gray-300 text-sm italic">Ask Guru says:</p>
-                        <p id="ai-response" class="text-white mt-2"></p>
-                    </div>
-                    <div id="ai-loading-indicator" class="mt-4 text-center text-fuchsia-400 hidden">
-                        <p>Consulting the Guru... Please wait.</p>
+                    <div id="recipe-response-container" class="space-y-4">
+                         <div id="recipe-loading-indicator" class="hidden flex justify-center items-center">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Loading...
+                         </div>
+                        <p id="recipe-response" class="text-gray-400 text-sm italic"></p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="mt-16 text-left">
-                <h3 class="text-3xl font-bold text-white mb-8 text-center">Community Wave Tips & Stories</h3>
-                <div id="community-tips-display" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <p class="text-center text-gray-400 col-span-full" id="no-tips-message">No tips yet. Be the first to share your wisdom!</p>
+        <!-- Personalized Wave Journey -->
+        <section id="wave-journey" class="text-center space-y-8">
+            <h2 class="text-4xl md:text-5xl font-bold">Your Personalized Wave Journey ✨</h2>
+            <p class="text-xl md:text-2xl font-medium text-gray-400 max-w-2xl mx-auto">Let the Guru AI craft a custom wave routine just for you!</p>
+            <form id="wave-routine-form" class="card max-w-3xl mx-auto space-y-4 text-left">
+                <div class="flex flex-col space-y-4">
+                    <label for="wave-stage" class="font-semibold text-gray-300">Current Wave Stage:</label>
+                    <select id="wave-stage" class="input-field">
+                        <option>Select your stage</option>
+                        <option>Beginner (just started)</option>
+                        <option>Intermediate (waves forming)</option>
+                        <option>Advanced (consistent waves)</option>
+                        <option>Wolfing (growing hair for deeper waves)</option>
+                        <option>Maintaining (keeping waves sharp)</option>
+                    </select>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <label for="desired-pattern" class="font-semibold text-gray-300">Desired Wave Pattern:</label>
+                    <select id="desired-pattern" class="input-field">
+                        <option>Select your goal pattern</option>
+                        <option>360 Waves (Classic)</option>
+                        <option>540 Waves (Diagonal)</option>
+                        <option>720 Waves (Swirl)</option>
+                        <option>Beehive Connection</option>
+                    </select>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <label for="hair-type" class="font-semibold text-gray-300">Hair Texture:</label>
+                    <select id="hair-type" class="input-field">
+                        <option>Select your hair type</option>
+                        <option>Coarse/Thick</option>
+                        <option>Medium</option>
+                        <option>Fine/Soft</option>
+                    </select>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <label for="wave-goal" class="font-semibold text-gray-300">Your Wave Goals:</label>
+                    <textarea id="wave-goal" class="input-field h-24" placeholder="E.g., deeper waves, fixing forks, more shine"></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full">Get My Custom Routine ✨</button>
+            </form>
+            <div id="routine-response-container" class="space-y-4">
+                 <div id="routine-loading-indicator" class="hidden flex justify-center items-center">
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Loading...
+                 </div>
+                <div id="routine-response" class="card text-left max-w-3xl mx-auto space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- The Gauntlet Section -->
+        <section id="gauntlet" class="text-center space-y-8">
+            <h2 class="text-4xl md:text-5xl font-bold">The Gauntlet</h2>
+            <p class="text-xl md:text-2xl font-medium text-gray-400 max-w-2xl mx-auto">Prove your dominance. Earn your rank.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-5xl mx-auto">
+                <div class="card cursor-pointer" onclick="showWaverDetails(1)">
+                    <p class="font-bold text-2xl">Waver 1</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(2)">
+                    <p class="font-bold text-2xl">Waver 2</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(3)">
+                    <p class="font-bold text-2xl">Waver 3</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(4)">
+                    <p class="font-bold text-2xl">Waver 4</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(5)">
+                    <p class="font-bold text-2xl">Waver 5</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(6)">
+                    <p class="font-bold text-2xl">Waver 6</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(7)">
+                    <p class="font-bold text-2xl">Waver 7</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(8)">
+                    <p class="font-bold text-2xl">Waver 8</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(9)">
+                    <p class="font-bold text-2xl">Waver 9</p>
+                </div>
+                <div class="card cursor-pointer" onclick="showWaverDetails(10)">
+                    <p class="font-bold text-2xl">Waver 10</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="py-16 md:py-24 bg-gradient-to-br from-indigo-900 to-purple-900 text-white text-center">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-6">Ready to Elevate Your Wave Game?</h2>
-            <p class="text-xl md:text-2xl mb-8 opacity-90">Join the Guru Brushes movement and achieve the flawless 360 waves you've always wanted.</p>
-            <a href="#contact-form-section" class="btn-primary px-10 py-4">Contact Our Team</a>
-        </div>
-    </section>
+        <!-- Community Section -->
+        <section id="community" class="text-center space-y-8">
+            <h2 class="text-4xl md:text-5xl font-bold">Community: Share & Learn</h2>
+            <p class="text-xl md:text-2xl font-medium text-gray-400 max-w-2xl mx-auto">Connect with fellow wavers and share your wisdom.</p>
+            <div class="card max-w-3xl mx-auto space-y-4 text-left">
+                <h3 class="text-2xl font-bold text-cyan-400">Share Your Wave Wisdom</h3>
+                <p>Help the community grow by sharing your best wave tips or personal success stories!</p>
+                <form id="wave-tip-form" class="space-y-4">
+                    <div>
+                        <label for="community-name" class="block font-semibold text-gray-300">Your Name/Handle</label>
+                        <input type="text" id="community-name" class="input-field mt-1" required>
+                    </div>
+                    <div>
+                        <label for="wave-content" class="block font-semibold text-gray-300">Your Tip or Story</label>
+                        <textarea id="wave-content" class="input-field mt-1 h-32" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">Submit My Wisdom</button>
+                </form>
+            </div>
+            <div class="card max-w-3xl mx-auto mt-8 text-left">
+                <h3 class="text-2xl font-bold text-cyan-400 mb-4">Community Wave Tips & Stories</h3>
+                <div id="no-tips-message" class="text-center italic text-gray-400">No tips yet. Be the first to share your wisdom!</div>
+                <div id="community-tips-display" class="space-y-4">
+                    <!-- Community tips will be displayed here -->
+                </div>
+            </div>
+        </section>
 
-    <section id="contact-form-section" class="py-16 md:py-24 bg-gray-900">
-        <div class="container mx-auto px-4 max-w-2xl text-center">
-            <h2 class="section-heading">Contact Us</h2>
-            <p class="text-xl text-gray-300 mb-12">Send us a message and we'll get back to you as soon as possible.</p>
-            <form id="contact-form" class="text-left bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-700">
-                <div class="mb-4">
-                    <label for="full-name" class="block text-gray-200 text-sm font-bold mb-2">Full Name</label>
-                    <input type="text" id="full-name" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="John Doe" required>
+        <!-- The Armory Section -->
+        <section id="products" class="text-center space-y-8">
+            <h2 class="text-4xl md:text-5xl font-bold">The Armory</h2>
+            <p class="text-xl md:text-2xl font-medium text-gray-400 max-w-2xl mx-auto">Gear up with the tools of the trade.</p>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="card space-y-4">
+                    <img src="https://placehold.co/300x200/0d1117/238636?text=Soft+Brush" alt="Soft Bristle Brush" class="w-full rounded-md">
+                    <h3 class="text-2xl font-bold text-cyan-400">Soft Brush</h3>
+                    <p class="text-lg">$15.00</p>
+                    <button onclick="purchaseBrush('Soft Brush')" class="btn-primary w-full">Purchase</button>
                 </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-200 text-sm font-bold mb-2">Email Address</label>
-                    <input type="email" id="email" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="john.doe@example.com" required>
+                <div class="card space-y-4">
+                    <img src="https://placehold.co/300x200/0d1117/8957e5?text=Medium+Brush" alt="Medium Bristle Brush" class="w-full rounded-md">
+                    <h3 class="text-2xl font-bold text-cyan-400">Medium Brush</h3>
+                    <p class="text-lg">$18.00</p>
+                    <button onclick="purchaseBrush('Medium Brush')" class="btn-primary w-full">Purchase</button>
                 </div>
-                <div class="mb-6">
-                    <label for="message" class="block text-gray-200 text-sm font-bold mb-2">Message</label>
-                    <textarea id="message" rows="6" class="shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 bg-gray-700 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Type your message here..." required></textarea>
+                <div class="card space-y-4">
+                    <img src="https://placehold.co/300x200/0d1117/eb536f?text=Hard+Brush" alt="Hard Bristle Brush" class="w-full rounded-md">
+                    <h3 class="text-2xl font-bold text-cyan-400">Hard Brush</h3>
+                    <p class="text-lg">$20.00</p>
+                    <button onclick="purchaseBrush('Hard Brush')" class="btn-primary w-full">Purchase</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="text-center space-y-8">
+            <h2 class="text-4xl md:text-5xl font-bold">Contact Us</h2>
+            <p class="text-xl md:text-2xl font-medium text-gray-400 max-w-2xl mx-auto">We're here to help you on your journey.</p>
+            <form class="card max-w-2xl mx-auto space-y-4 text-left">
+                <div>
+                    <label for="contact-name" class="block font-semibold text-gray-300">Name</label>
+                    <input type="text" id="contact-name" class="input-field mt-1">
+                </div>
+                <div>
+                    <label for="contact-email" class="block font-semibold text-gray-300">Email</label>
+                    <input type="email" id="contact-email" class="input-field mt-1">
+                </div>
+                <div>
+                    <label for="contact-message" class="block font-semibold text-gray-300">Message</label>
+                    <textarea id="contact-message" class="input-field mt-1 h-32"></textarea>
                 </div>
                 <button type="submit" class="btn-primary w-full">Send Message</button>
             </form>
-            <div id="contact-form-message" class="mt-4 text-center text-sm font-semibold"></div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center p-6 md:p-8 mt-16 border-t border-gray-700 text-gray-400">
+        <p>© 2024 Ask Guru. All rights reserved.</p>
+        <div class="flex justify-center space-x-4 mt-2">
+            <a href="#" class="hover:text-cyan-400">Privacy Policy</a>
+            <a href="#" class="hover:text-cyan-400">Terms of Service</a>
         </div>
-    </section>
+    </footer>
 
+    <!-- Waver Details Modal -->
+    <div id="waverModal" class="modal-overlay hidden">
+        <div class="modal-content space-y-4 text-center">
+            <h3 id="waverName" class="text-2xl font-bold text-cyan-400">Waver Name</h3>
+            <p id="waverTeam" class="text-gray-300">Team</p>
+            <p id="waverOrigin" class="text-gray-300">Origin</p>
+            <button onclick="closeModal('waverModal')" class="btn-primary mt-4">Close</button>
+        </div>
+    </div>
 
-    <script>
-        // --- Navigation Bar ---
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // --- Products Slideshow ---
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active-dot", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active-dot";
-        }
-
-        // --- Wave Journey Planner Form ---
-        document.getElementById('wave-routine-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const form = event.target;
-            const stage = form.querySelector('#wave-stage').value;
-            const hairType = form.querySelector('#hair-type').value;
-            const goals = form.querySelector('#wave-goal').value;
-
-            const loadingIndicator = document.getElementById('routine-loading-indicator');
-            const responseContainer = document.getElementById('routine-response-container');
-            const responseDiv = document.getElementById('routine-response');
-
-            loadingIndicator.classList.remove('hidden');
-            responseContainer.classList.add('hidden');
-            responseDiv.innerHTML = '';
-
-            // Simulate AI generation with a delay
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            let routine = '';
-            if (stage === 'Beginner (just started)') {
-                routine = `
-                    <h4 class="text-xl font-bold text-cyan-400">Beginner Routine:</h4>
-                    <p>Welcome to the wave journey! Consistency is key.</p>
-                    <ul>
-                        <li>**Brushing:** Brush for at least 15-20 minutes a day, using a **Medium Bristle Wave Brush** to train your hair. Focus on brushing in a consistent pattern from your crown out.</li>
-                        <li>**Moisture:** Apply a light leave-in conditioner or wave pomade daily to keep hair moisturized.</li>
-                        <li>**Compression:** Wear a durag tightly at night to lay your hair down.</li>
-                    </ul>
-                `;
-            } else if (stage === 'Intermediate (waves forming)') {
-                routine = `
-                    <h4 class="text-xl font-bold text-cyan-400">Intermediate Routine:</h4>
-                    <p>Your waves are forming! Now it's time to refine them.</p>
-                    <ul>
-                        <li>**Brushing:** Increase your brushing time to 30 minutes or more daily. Use a **Hard Bristle Wave Brush** for deep compression, followed by a **Medium brush** to smooth.</li>
-                        <li>**Wash & Style:** Use a moisturizing shampoo (like our upcoming **Whip Shampoo**) once a week, and brush while the shampoo is in your hair.</li>
-                        <li>**Forks:** To fix forks, brush those areas extra, focusing on the correct pattern.</li>
-                    </ul>
-                `;
-            } else if (stage === 'Advanced (consistent waves)') {
-                routine = `
-                    <h4 class="text-xl font-bold text-cyan-400">Advanced Routine:</h4>
-                    <p>You've got it! Now maintain and perfect your pattern.</p>
-                    <ul>
-                        <li>**Brushing:** Maintain a daily brushing routine of 20-30 minutes. Use the **Hard brush** for deep work and the **Soft brush** to lay down frizz and add shine.</li>
-                        <li>**Moisture:** Use light oils or butter to keep your waves shimmering without weighing them down.</li>
-                        <li>**Wolfing:** Consider wolfing for 4-6 weeks to deepen your pattern before getting a cut.</li>
-                    </ul>
-                `;
-            } else if (stage === 'Wolfing (growing hair for deeper waves)') {
-                routine = `
-                    <h4 class="text-xl font-bold text-cyan-400">Wolfing Routine:</h4>
-                    <p>This is where waves are made. Dedication is key!</p>
-                    <ul>
-                        <li>**Brushing:** Brush intensely for at least 45 minutes a day with a **Hard Bristle Wave Brush**. This is crucial for training the longer hair.</li>
-                        <li>**Shine & Lay:** Finish each session with a **Soft Bristle Brush** to lay down the top layer.</li>
-                        <li>**Durag:** Never leave the house without a durag. Sleep in a durag every night.</li>
-                        <li>**Wash & Style:** Shampoo with a strong lather (like our **Whip Shampoo**) once a week to clean the scalp.</li>
-                    </ul>
-                `;
-            } else if (stage === 'Maintaining (keeping waves sharp)') {
-                routine = `
-                    <h4 class="text-xl font-bold text-cyan-400">Maintaining Routine:</h4>
-                    <p>Keep your waves in top shape and looking sharp!</p>
-                    <ul>
-                        <li>**Brushing:** 15-20 minutes daily with a **Medium** or **Soft Bristle Brush** to maintain the pattern.</li>
-                        <li>**Conditioning:** Use a leave-in conditioner or moisturizer to keep your hair healthy and shiny.</li>
-                        <li>**Durag:** Continue to wear a durag regularly, especially at night, to prevent frizz and maintain compression.</li>
-                    </ul>
-                `;
-            }
-
-            responseDiv.innerHTML = routine;
-            loadingIndicator.classList.add('hidden');
-            responseContainer.classList.remove('hidden');
-        });
-
-        // --- Community Section ---
-        document.getElementById('wave-tip-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const name = document.getElementById('community-name').value;
-            const content = document.getElementById('wave-content').value;
-            const messageDiv = document.getElementById('form-message');
-            const tipsContainer = document.getElementById('community-tips-display');
-            const noTipsMessage = document.getElementById('no-tips-message');
-
-            const tipHtml = `
-                <div class="card p-6">
-                    <h4 class="text-xl font-bold text-purple-400">${name}</h4>
-                    <p class="text-gray-300 mt-2">${content}</p>
+    <!-- Scalp Analyzer Modal -->
+    <div id="analyzerModal" class="modal-overlay hidden">
+        <div class="modal-content space-y-4">
+            <h3 class="text-2xl font-bold text-cyan-400 text-center">AI Scalp Analyzer ✨</h3>
+            <p class="text-center text-gray-300">Answer a few questions for a personalized analysis.</p>
+            <form id="analyzer-form" class="space-y-4">
+                <div>
+                    <label for="scalp-condition" class="block font-semibold text-gray-300">Is your scalp prone to being dry or oily?</label>
+                    <select id="scalp-condition" class="input-field mt-1">
+                        <option value="dry">Dry</option>
+                        <option value="oily">Oily</option>
+                    </select>
                 </div>
-            `;
+                <div>
+                    <label for="scalp-issue" class="block font-semibold text-gray-300">Do you experience any of these issues?</label>
+                    <select id="scalp-issue" class="input-field mt-1">
+                        <option value="none">None</option>
+                        <option value="dandruff">Dandruff</option>
+                        <option value="itchiness">Itchiness</option>
+                        <option value="redness">Redness</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="scalp-routine" class="block font-semibold text-gray-300">How often do you wash your hair?</label>
+                    <input type="text" id="scalp-routine" class="input-field mt-1" placeholder="e.g. '3 times a week' or 'once a month'">
+                </div>
+                <button type="submit" class="btn-primary w-full">Analyze My Scalp</button>
+            </form>
+            <div id="analyzer-response-container" class="space-y-4">
+                 <div id="analyzer-loading-indicator" class="hidden flex justify-center items-center">
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Loading...
+                 </div>
+                <div id="analyzer-response" class="card text-left space-y-4 hidden"></div>
+            </div>
+            <button onclick="closeModal('analyzerModal')" class="btn-primary w-full mt-4">Close</button>
+        </div>
+    </div>
 
-            if (noTipsMessage) {
-                noTipsMessage.style.display = 'none';
-            }
 
-            tipsContainer.insertAdjacentHTML('afterbegin', tipHtml);
-            messageDiv.textContent = 'Thank you for sharing your wisdom!';
-            messageDiv.style.color = '#34d399'; // Green-500
-            document.getElementById('wave-tip-form').reset();
-        });
+    <!-- Toast Notification -->
+    <div id="toast-notification"></div>
 
-        document.getElementById('ask-ai-btn').addEventListener('click', async function() {
-            const question = document.getElementById('ai-question').value;
-            const responseContainer = document.getElementById('ai-response-container');
-            const responseDiv = document.getElementById('ai-response');
-            const loadingIndicator = document.getElementById('ai-loading-indicator');
+    <script type="module">
+        // --- Global State and Utility Functions ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-            if (!question) {
-                alert('Please enter a question for the Guru.');
+        // --- Firebase Imports and Initialization ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        let db, auth;
+        let userId;
+
+        // This will store the data from Firestore
+        let waveTips = [];
+
+        let waverData = [
+            { id: 1, name: 'Waver 1', team: 'Team: Elite Waves', origin: 'Origin: Los Angeles, CA' },
+            { id: 2, name: 'Waver 2', team: 'Team: The Wave Gods', origin: 'Origin: New York, NY' },
+            { id: 3, name: 'Waver 3', team: 'Team: Crown Control', origin: 'Origin: Atlanta, GA' },
+            { id: 4, name: 'Waver 4', team: 'Team: The Gauntlet', origin: 'Origin: Houston, TX' },
+            { id: 5, name: 'Waver 5', team: 'Team: Wave Chasers', origin: 'Origin: Chicago, IL' },
+            { id: 6, name: 'Waver 6', team: 'Team: Master Combers', origin: 'Origin: Miami, FL' },
+            { id: 7, name: 'Waver 7', team: 'Team: Spiral Kings', origin: 'Origin: Washington, DC' },
+            { id: 8, name: 'Waver 8', team: 'Team: The Unravelers', origin: 'Origin: Philadelphia, PA' },
+            { id: 9, name: 'Waver 9', team: 'Team: Deep Tides', origin: 'Origin: Dallas, TX' },
+            { id: 10, name: 'Waver 10', team: 'Team: The Monarchs', origin: 'Origin: Oakland, CA' }
+        ];
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            if (!toast) {
+                console.error("Toast notification element not found.");
                 return;
             }
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
-            loadingIndicator.classList.remove('hidden');
-            responseContainer.classList.add('hidden');
-            responseDiv.textContent = '';
+        // Function to call Gemini API with a given prompt
+        async function callGeminiAPI(prompt, systemInstruction = "") {
+            // Your API key goes here. Replace 'YOUR_API_KEY_HERE' with your actual key.
+            const apiKey = 'YOUR_API_KEY_HERE';
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-            try {
-                // Call the Netlify Function endpoint
-                const response = await fetch(`/.netlify/functions/ask-guru?question=${encodeURIComponent(question)}`);
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] },
+            };
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`API request failed with status: ${response.status}, message: ${errorText}`);
+            }
+
+            const data = await response.json();
+            return data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
+        }
+
+        // --- Mobile Menu ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // --- Ask Guru AI (Main Section) ---
+        const mainAskGuruForm = document.getElementById('main-ask-guru-form');
+        const mainAiQuestionInput = document.getElementById('main-ai-question');
+        const mainAiResponseContainer = document.getElementById('main-ai-response-container');
+        const mainAiResponseDiv = document.getElementById('main-ai-response');
+        const mainAiLoadingIndicator = document.getElementById('main-ai-loading-indicator');
+
+        if (mainAskGuruForm && mainAiQuestionInput) {
+            mainAiResponseDiv.textContent = 'Ask me anything about waves or scalp health!';
+            mainAskGuruForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const question = mainAiQuestionInput.value.trim();
+                if (question === '') {
+                    return;
                 }
 
-                const data = await response.json();
-                responseDiv.textContent = data.answer; // Assuming your function returns { "answer": "..." }
+                mainAiLoadingIndicator.classList.remove('hidden');
+                mainAiResponseContainer.classList.add('hidden');
+
+                try {
+                    const aiResponse = await callGeminiAPI(question, "You are a professional wave expert and scalp health guru. Provide helpful and encouraging advice to the user. Keep your responses concise and to the point.");
+                    mainAiResponseDiv.textContent = aiResponse;
+                } catch (error) {
+                    mainAiResponseDiv.textContent = `Sorry, an error occurred: ${error.message}. Please check the console for details.`;
+                    console.error('Error fetching data from API:', error);
+                } finally {
+                    mainAiLoadingIndicator.classList.add('hidden');
+                    mainAiResponseContainer.classList.remove('hidden');
+                }
+            });
+        }
+
+        // --- AI Scalp Health Analyzer ---
+        const launchAnalyzerBtn = document.getElementById('launch-analyzer-btn');
+        const analyzerForm = document.getElementById('analyzer-form');
+        const analyzerLoadingIndicator = document.getElementById('analyzer-loading-indicator');
+        const analyzerResponseDiv = document.getElementById('analyzer-response');
+        const analyzerResponseContainer = document.getElementById('analyzer-response-container');
+
+        if (launchAnalyzerBtn) {
+            launchAnalyzerBtn.addEventListener('click', () => {
+                // Reset response and show modal
+                analyzerResponseDiv.textContent = '';
+                analyzerResponseDiv.classList.add('hidden');
+                analyzerLoadingIndicator.classList.add('hidden');
+                analyzerResponseContainer.classList.remove('hidden');
+                openModal('analyzerModal');
+            });
+        }
+
+        if (analyzerForm) {
+            analyzerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                analyzerLoadingIndicator.classList.remove('hidden');
+                analyzerResponseDiv.classList.add('hidden');
+                
+                const scalpCondition = document.getElementById('scalp-condition').value;
+                const scalpIssue = document.getElementById('scalp-issue').value;
+                const scalpRoutine = document.getElementById('scalp-routine').value.trim();
+
+                const prompt = `Analyze a scalp with the following characteristics and provide a health score out of 100, followed by personalized advice.
+                - Condition: ${scalpCondition}
+                - Issues: ${scalpIssue}
+                - Washing frequency: ${scalpRoutine || 'Not specified'}`;
+
+                try {
+                    const aiResponse = await callGeminiAPI(prompt, "You are a professional trichologist (scalp health expert). Provide a clear, actionable analysis and advice. Format your response with a clear 'Health Score' and 'Personalized Advice' sections. Use Markdown for formatting.");
+                    analyzerResponseDiv.innerHTML = aiResponse.replace(/\n/g, '<br/>'); // Preserve newlines
+                    analyzerResponseDiv.classList.remove('hidden');
+                } catch (error) {
+                    analyzerResponseDiv.textContent = `Sorry, an error occurred: ${error.message}.`;
+                    analyzerResponseDiv.classList.remove('hidden');
+                    console.error('Error calling Analyzer API:', error);
+                } finally {
+                    analyzerLoadingIndicator.classList.add('hidden');
+                }
+            });
+        }
+
+
+        // --- Natural Recipe Synthesizer ---
+        const recipeForm = document.getElementById('recipe-form');
+        const recipeIngredientsInput = document.getElementById('recipe-ingredients');
+        const recipeResponseContainer = document.getElementById('recipe-response-container');
+        const recipeResponseDiv = document.getElementById('recipe-response');
+        const recipeLoadingIndicator = document.getElementById('recipe-loading-indicator');
+
+        if (recipeForm) {
+            recipeForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const ingredients = recipeIngredientsInput.value.trim();
+                if (ingredients === '') {
+                    return;
+                }
+
+                recipeLoadingIndicator.classList.remove('hidden');
+                recipeResponseContainer.classList.add('hidden');
+                    
+                const prompt = `Based on the following ingredients, create a detailed recipe for a natural hair pomade or product for deep waves: ${ingredients}. Include steps, measurements, and tips for application.`;
+                try {
+                    const aiResponse = await callGeminiAPI(prompt, "You are a DIY hair product expert. Provide a recipe that is easy to follow and uses natural ingredients. The recipe should be well-structured and include helpful tips.");
+                    recipeResponseDiv.textContent = aiResponse;
+                } catch (error) {
+                    recipeResponseDiv.textContent = `Sorry, an error occurred: ${error.message}.`;
+                    console.error('Error fetching data from API:', error);
+                } finally {
+                    recipeLoadingIndicator.classList.add('hidden');
+                    recipeResponseContainer.classList.remove('hidden');
+                }
+            });
+        }
+
+        // --- Wave Journey Planner ---
+        const journeyForm = document.getElementById('wave-routine-form');
+        const routineLoadingIndicator = document.getElementById('routine-loading-indicator');
+        const routineResponseContainer = document.getElementById('routine-response-container');
+        const routineResponseDiv = document.getElementById('routine-response');
+
+        if (journeyForm) {
+            journeyForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                routineLoadingIndicator.classList.remove('hidden');
+                routineResponseContainer.classList.add('hidden');
+
+                const stage = document.getElementById('wave-stage').value;
+                const hairType = document.getElementById('hair-type').value;
+                const goal = document.getElementById('wave-goal').value.trim();
+                const pattern = document.getElementById('desired-pattern').value;
+
+                if (stage === 'Select your stage' || pattern === 'Select your goal pattern' || hairType === 'Select your hair type') {
+                    showToast('Please select all options for a custom routine.');
+                    routineLoadingIndicator.classList.add('hidden');
+                    routineResponseContainer.classList.remove('hidden');
+                    return;
+                }
+
+                const prompt = `As a hair care expert, generate a detailed daily and weekly wave care routine.
+                - Current Wave Stage: ${stage}
+                - Hair Texture: ${hairType}
+                - Desired Wave Pattern: ${pattern}
+                - Specific Goals: ${goal || 'Not specified'}`;
+
+                try {
+                    const aiResponse = await callGeminiAPI(prompt, "You are a professional wave expert. Create a personalized, step-by-step wave routine based on the user's hair characteristics and goals. Use markdown for headings and bullet points to make the routine easy to follow. Be encouraging and concise.");
+                    routineResponseDiv.innerHTML = `<h4 class="text-xl font-bold text-cyan-400">Your Guru Routine:</h4><p class="mt-2 text-gray-200 whitespace-pre-wrap">${aiResponse}</p>`;
+                } catch (error) {
+                    routineResponseDiv.innerHTML = `<p class="text-gray-400 italic">Sorry, an error occurred: ${error.message}.</p>`;
+                    console.error('Error fetching data from API:', error);
+                } finally {
+                    routineLoadingIndicator.classList.add('hidden');
+                    routineResponseContainer.classList.remove('hidden');
+                }
+            });
+        }
+
+        // --- Community Section (Updated for Firestore) ---
+        const waveTipForm = document.getElementById('wave-tip-form');
+        const communityTipsDisplay = document.getElementById('community-tips-display');
+        const noTipsMessage = document.getElementById('no-tips-message');
+
+        if (waveTipForm) {
+            waveTipForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const name = document.getElementById('community-name').value;
+                const content = document.getElementById('wave-content').value;
+
+                if (name && content) {
+                    try {
+                        // Add a new document to the "community_tips" collection in Firestore
+                        await addDoc(collection(db, `artifacts/${appId}/public/data/community_tips`), {
+                            name: name,
+                            content: content,
+                            userId: userId,
+                            timestamp: serverTimestamp()
+                        });
+                        showToast('Wisdom submitted successfully! 🙏');
+                    } catch (error) {
+                        console.error("Error adding document: ", error);
+                        showToast('Error submitting tip. Please try again.');
+                    }
+                }
+                waveTipForm.reset();
+            });
+        }
+
+        function displayTips() {
+            if (!communityTipsDisplay || !noTipsMessage) return;
+
+            communityTipsDisplay.innerHTML = '';
+            if (waveTips.length === 0) {
+                noTipsMessage.style.display = 'block';
+            } else {
+                noTipsMessage.style.display = 'none';
+                waveTips.forEach(tip => {
+                    const tipCard = document.createElement('div');
+                    tipCard.className = 'card text-left';
+                    tipCard.innerHTML = `
+                        <h4 class="text-xl font-bold text-cyan-400 mb-2">${tip.name}</h4>
+                        <p class="text-gray-300 italic mb-2">shared this wisdom:</p>
+                        <p class="text-gray-200">${tip.content}</p>
+                    `;
+                    communityTipsDisplay.appendChild(tipCard);
+                });
+            }
+        }
+
+        // --- The Gauntlet Section ---
+        function showWaverDetails(id) {
+            const waver = waverData.find(w => w.id === id);
+            if (!waver) return;
+
+            document.getElementById('waverName').textContent = waver.name;
+            document.getElementById('waverTeam').textContent = waver.team;
+            document.getElementById('waverOrigin').textContent = waver.origin;
+            openModal('waverModal');
+        }
+
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.showWaverDetails = showWaverDetails;
+
+        // --- Product Purchase Section ---
+        function purchaseBrush(productName) {
+            const message = `${productName} added to cart! 🛒`;
+            showToast(message);
+        }
+
+        window.purchaseBrush = purchaseBrush;
+
+        // --- Main execution block ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!firebaseConfig) {
+                console.error("Firebase config is not defined. Cannot initialize app.");
+                return;
+            }
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                userId = auth.currentUser.uid;
+                console.log(`Authenticated with user ID: ${userId}`);
+
+                const q = query(collection(db, `artifacts/${appId}/public/data/community_tips`));
+                onSnapshot(q, (querySnapshot) => {
+                    waveTips = [];
+                    querySnapshot.forEach((doc) => {
+                        waveTips.push({ id: doc.id, ...doc.data() });
+                    });
+                    displayTips();
+                });
 
             } catch (error) {
-                console.error('Error fetching from Netlify Function:', error);
-                responseDiv.textContent = 'Sorry, the Guru is unavailable right now. Please try again later.';
-            } finally {
-                loadingIndicator.classList.add('hidden');
-                responseContainer.classList.remove('hidden');
+                console.error("Firebase authentication failed: ", error);
+                showToast("Authentication failed. The app may not function correctly. Check the console for more details.");
             }
-        });
-
-        // --- Contact Form ---
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const messageDiv = document.getElementById('contact-form-message');
-
-            // In a real application, you would send this data to a server.
-            console.log('Form Submitted!');
-            console.log('Name:', document.getElementById('full-name').value);
-            console.log('Email:', document.getElementById('email').value);
-            console.log('Message:', document.getElementById('message').value);
-
-            messageDiv.textContent = 'Message sent successfully! We will get back to you soon.';
-            messageDiv.style.color = '#34d399'; // Green-500
-            document.getElementById('contact-form').reset();
         });
     </script>
 </body>
